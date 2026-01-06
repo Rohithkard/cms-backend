@@ -1,27 +1,37 @@
 <?php
 require_once __DIR__ . "/../core/response.php";
 
-function route(string $method, string $path, callable $handler): void {
-  $reqMethod = $_SERVER["REQUEST_METHOD"];
-  $reqPath = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+function current_path(): string
+{
+    $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
-  // find "/api/public/index.php/..."
-  $base = $_SERVER["SCRIPT_NAME"]; // /api/public/index.php
-  $subPath = "/";
-  if (strpos($reqPath, $base) === 0) {
-    $subPath = substr($reqPath, strlen($base));
-    if ($subPath === "") $subPath = "/";
-  }
+    // remove trailing slash
+    if ($uri !== "/" && str_ends_with($uri, "/")) {
+        $uri = rtrim($uri, "/");
+    }
 
-  if ($reqMethod === "OPTIONS") {
-    json_response(["success"=>true], 200);
-  }
-
-  if ($reqMethod === $method && $subPath === $path) {
-    $handler();
-  }
+    return $uri;
 }
 
-function not_found(): void {
-  json_response(["success"=>false,"message"=>"Route not found"], 404);
+function route(string $method, string $path, callable $handler): void
+{
+    if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+        json_response(["success" => true]);
+    }
+
+    $reqMethod = $_SERVER["REQUEST_METHOD"];
+    $reqPath   = current_path();
+
+    if ($reqMethod === $method && $reqPath === $path) {
+        $handler();
+        exit;
+    }
+}
+
+function not_found(): void
+{
+    json_response([
+        "success" => false,
+        "message" => "Route not found"
+    ], 404);
 }
