@@ -1,0 +1,1066 @@
+{
+  "collection": {
+    "info": {
+      "_postman_id": "741a8857-f5e9-4aae-ab1e-d7c3cce961e4",
+      "name": "CMS Updated API",
+      "description": "Plain PHP CMS API (Auth, Company, Categories, Products, Banners, Pages)",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "createdAt": "2026-01-06T05:15:22.000Z",
+      "updatedAt": "2026-01-06T07:41:58.000Z",
+      "lastUpdatedBy": "24423353",
+      "uid": "44267784-741a8857-f5e9-4aae-ab1e-d7c3cce961e4"
+    },
+    "item": [
+      {
+        "name": "Auth",
+        "item": [
+          {
+            "name": "Admin Login",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "exec": [
+                    "if (pm.response.code === 200) {",
+                    "  const json = pm.response.json();",
+                    "  if (json.token) pm.environment.set('token', json.token);",
+                    "}"
+                  ],
+                  "type": "text/javascript",
+                  "id": "4db93b11-9f6a-445e-8142-da3594299300"
+                }
+              }
+            ],
+            "id": "32b95d90-3d30-4535-a16f-73a10fe138a6",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Admin@123\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/auth/login",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "auth",
+                  "login"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T05:15:23.000Z",
+            "uid": "44267784-32b95d90-3d30-4535-a16f-73a10fe138a6"
+          }
+        ],
+        "id": "0c878300-6e00-480b-891a-22411368c48e",
+        "createdAt": "2026-01-06T05:15:23.000Z",
+        "updatedAt": "2026-01-06T05:15:23.000Z",
+        "uid": "44267784-0c878300-6e00-480b-891a-22411368c48e"
+      },
+      {
+        "name": "Company",
+        "item": [
+          {
+            "name": "Get Company (Public)",
+            "id": "94a0b8cd-04b9-4eb5-9f18-2dbfd838bf7a",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/company",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "company"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T05:15:23.000Z",
+            "uid": "44267784-94a0b8cd-04b9-4eb5-9f18-2dbfd838bf7a"
+          },
+          {
+            "name": "Update Company (Admin)",
+            "id": "0b12650d-e99e-4935-9b76-cbf3b837e91f",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"company_name\": \"Stokai\",\n  \"phone\": \"+91 97999 89898\",\n  \"email\": \"support@stokai.live\",\n  \"address\": \"Stokai HQ, Tech Park, India\",\n  \"website\": \"https://stokai.live\",\n  \"map_url\": \"https://maps.google.com/?q=stokai\",\n  \"whatsapp\": \"+919799989898\",\n  \"facebook\": \"https://facebook.com/stokai\",\n  \"instagram\": \"https://instagram.com/stokai\",\n  \"youtube\": \"https://youtube.com/@stokai\",\n  \"linkedin\": \"https://linkedin.com/company/stokai\"\n}\n"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/company/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "company",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T10:24:55.000Z",
+            "uid": "44267784-0b12650d-e99e-4935-9b76-cbf3b837e91f"
+          },
+          {
+            "name": "Upload Company Image",
+            "id": "e053e286-f944-42aa-adcc-585300264ca5",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "image",
+                    "type": "file",
+                    "src": "/D:/Application/images/pexels-andersonguerra-1197132.jpg"
+                  },
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "type": "text",
+                    "uuid": "37ae2f93-f948-4f96-9a9e-0e6f015b7fc7"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/upload/image",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "upload",
+                  "image"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T10:21:32.000Z",
+            "uid": "44267784-e053e286-f944-42aa-adcc-585300264ca5"
+          }
+        ],
+        "id": "fb101a5c-9c69-450b-9578-1ff7a0100d84",
+        "createdAt": "2026-01-06T05:15:23.000Z",
+        "updatedAt": "2026-01-06T05:15:23.000Z",
+        "uid": "44267784-fb101a5c-9c69-450b-9578-1ff7a0100d84"
+      },
+      {
+        "name": "theme",
+        "item": [
+          {
+            "name": "Get theme(Public)",
+            "id": "cdb3de49-3d9f-418f-8b1f-90843b1f0441",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/theme",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "theme"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:49:24.000Z",
+            "updatedAt": "2026-01-06T05:49:53.000Z",
+            "uid": "44267784-cdb3de49-3d9f-418f-8b1f-90843b1f0441"
+          },
+          {
+            "name": "Update Theme(Admin)",
+            "id": "db581ecb-3ac1-4e50-a3a6-652a55f5aa8d",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"logo_url\": \"/uploads/logo.png\",\n  \"favicon_url\": \"/uploads/favicon.ico\",\n  \"primary_color\": \"#0ea5e9\",\n  \"secondary_color\": \"#1e293b\",\n  \"background_color\": \"#ffffff\",\n  \"text_color\": \"#0f172a\",\n  \"header_bg\": \"#ffffff\",\n  \"footer_bg\": \"#0f172a\",\n  \"font_family\": \"Inter, system-ui, -apple-system, BlinkMacSystemFont\"\n}\n"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/theme/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "theme",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:49:24.000Z",
+            "updatedAt": "2026-01-06T05:51:34.000Z",
+            "uid": "44267784-db581ecb-3ac1-4e50-a3a6-652a55f5aa8d"
+          }
+        ],
+        "id": "74544390-dff3-4344-a5da-85d96adb5274",
+        "createdAt": "2026-01-06T05:49:24.000Z",
+        "updatedAt": "2026-01-06T05:50:38.000Z",
+        "uid": "44267784-74544390-dff3-4344-a5da-85d96adb5274"
+      },
+      {
+        "name": "Categories",
+        "item": [
+          {
+            "name": "List Categories (Public)",
+            "id": "a9ad065e-6491-4940-bbb1-18a5fe3bed35",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/categories",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "categories"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T05:15:23.000Z",
+            "uid": "44267784-a9ad065e-6491-4940-bbb1-18a5fe3bed35"
+          },
+          {
+            "name": "Create Category (Admin)",
+            "id": "1337ebe7-ec8a-46aa-9efb-d1890b33cf24",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "name",
+                    "value": "Beveragessg",
+                    "type": "text",
+                    "uuid": "2c0927f9-2877-4777-bcc6-c1d8203a045b"
+                  },
+                  {
+                    "key": "slug",
+                    "value": "beveragessg",
+                    "type": "text",
+                    "uuid": "8ad877d5-fbee-49b2-b08b-6335d362caaa"
+                  },
+                  {
+                    "key": "sort_order",
+                    "value": "1",
+                    "type": "text",
+                    "uuid": "33a1c4cc-773b-4790-82be-bbe85d04adab"
+                  },
+                  {
+                    "key": "image",
+                    "type": "file",
+                    "uuid": "8866a064-7e9e-4bae-b569-5045caebc0e8",
+                    "src": "/D:/Application/images/pexels-andersonguerra-1197132.jpg"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/categories/create",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "categories",
+                  "create"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T10:25:19.000Z",
+            "uid": "44267784-1337ebe7-ec8a-46aa-9efb-d1890b33cf24"
+          },
+          {
+            "name": "Update Category (Admin)",
+            "id": "30f0565c-7bd3-4776-b2d7-9fce88c1c285",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "id",
+                    "value": "",
+                    "type": "text",
+                    "uuid": "5d0dbe41-fdc0-400e-9958-a90dc45fb170"
+                  },
+                  {
+                    "key": "name",
+                    "value": "",
+                    "type": "text",
+                    "uuid": "4855195a-11bf-4336-ba55-600bf49961ea"
+                  },
+                  {
+                    "key": "image",
+                    "type": "file",
+                    "uuid": "83dfbfba-cb8f-485d-8277-e0c0fb785167",
+                    "value": null
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/categories/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "categories",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T05:56:20.000Z",
+            "uid": "44267784-30f0565c-7bd3-4776-b2d7-9fce88c1c285"
+          },
+          {
+            "name": "Delete Category (Admin)",
+            "id": "a7316a77-fdd9-417d-bd66-8a6c666e18db",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{ \"id\": 1 }"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/categories/delete",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "categories",
+                  "delete"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T05:15:23.000Z",
+            "uid": "44267784-a7316a77-fdd9-417d-bd66-8a6c666e18db"
+          }
+        ],
+        "id": "45c0d9b5-0d14-406e-83a5-793d15e625f3",
+        "createdAt": "2026-01-06T05:15:23.000Z",
+        "updatedAt": "2026-01-06T05:15:23.000Z",
+        "uid": "44267784-45c0d9b5-0d14-406e-83a5-793d15e625f3"
+      },
+      {
+        "name": "Products",
+        "item": [
+          {
+            "name": "List Products",
+            "id": "5578f025-3d2d-45ac-a056-b4735ca9941f",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/products?category_id=1&only_offer=1",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "products"
+                ],
+                "query": [
+                  {
+                    "key": "category_id",
+                    "value": "1"
+                  },
+                  {
+                    "key": "only_offer",
+                    "value": "1"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T05:15:23.000Z",
+            "uid": "44267784-5578f025-3d2d-45ac-a056-b4735ca9941f"
+          },
+          {
+            "name": "View Product",
+            "id": "b15fc709-7341-499c-bc5b-b5cdc19b6f22",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/products/view?slug=test-product&id=2",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "products",
+                  "view"
+                ],
+                "query": [
+                  {
+                    "key": "slug",
+                    "value": "test-product"
+                  },
+                  {
+                    "key": "id",
+                    "value": "2",
+                    "type": "text"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T08:48:02.000Z",
+            "uid": "44267784-b15fc709-7341-499c-bc5b-b5cdc19b6f22"
+          },
+          {
+            "name": "Create Product (Admin)",
+            "id": "bdb00c00-d521-4ec3-895b-3f6e90e97621",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Fresh Orange Juiceg\",\n  \"slug\": \"fresh-orange-juiceg\",\n  \"description\": \"100% natural orange juice with no added sugar.\",\n  \"short_description\": \"Natural orange juice\",\n  \"sku\": \"OJ-0011\",\n  \"price\": 120,\n  \"mrp\": 150,\n  \"offer_price\": 99,\n  \"offer_start\": \"2026-01-01\",\n  \"offer_end\": \"2026-01-31\",\n  \"stock\": 50,\n  \"unit\": \"1 Litre\",\n  \"category_id\": 1,\n  \"brand\": \"Stokai Fresh\",\n  \"is_active\": 1\n}\n"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/products/create",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "products",
+                  "create"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T10:38:17.000Z",
+            "uid": "44267784-bdb00c00-d521-4ec3-895b-3f6e90e97621"
+          },
+          {
+            "name": "Update Product (Admin)",
+            "id": "165e4a31-9842-47c6-9887-8c65a50c2ae0",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": 1,\n  \"price\": 110\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/products/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "products",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T05:15:23.000Z",
+            "uid": "44267784-165e4a31-9842-47c6-9887-8c65a50c2ae0"
+          },
+          {
+            "name": "Delete Product (Admin)",
+            "id": "e13f3a9d-1a45-4385-82c6-be61cecc36fa",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{ \"id\": 1 }"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/products/delete",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "products",
+                  "delete"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T05:15:23.000Z",
+            "uid": "44267784-e13f3a9d-1a45-4385-82c6-be61cecc36fa"
+          },
+          {
+            "name": "create image for product(Admin)",
+            "id": "8753c463-8eef-40b2-8036-e5136f5b92f5",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}",
+                  "type": "text"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "product_id",
+                    "value": "2",
+                    "type": "text",
+                    "uuid": "e2e64584-7d77-42a2-a0d3-31242bd462ee"
+                  },
+                  {
+                    "key": "image",
+                    "type": "file",
+                    "uuid": "10261ac9-4df4-4140-b535-27637a0c5121",
+                    "src": "postman-cloud:///1f0eac6b-fb41-4640-b802-5a319ab93217"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/products/upload-image",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "products",
+                  "upload-image"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T06:10:29.000Z",
+            "updatedAt": "2026-01-06T06:14:05.000Z",
+            "uid": "44267784-8753c463-8eef-40b2-8036-e5136f5b92f5"
+          }
+        ],
+        "id": "9ff8690f-26d5-4c0c-882e-fd17cbf97c02",
+        "createdAt": "2026-01-06T05:15:23.000Z",
+        "updatedAt": "2026-01-06T06:10:29.000Z",
+        "uid": "44267784-9ff8690f-26d5-4c0c-882e-fd17cbf97c02"
+      },
+      {
+        "name": "Banner Image",
+        "item": [
+          {
+            "name": "list Banners",
+            "id": "5f2a80be-7eb1-40c3-bf07-a5b34337c7c4",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/banners?type=HOME_TOP",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "banners"
+                ],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "HOME_TOP"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T06:16:59.000Z",
+            "updatedAt": "2026-01-06T06:26:51.000Z",
+            "uid": "44267784-5f2a80be-7eb1-40c3-bf07-a5b34337c7c4"
+          },
+          {
+            "name": "Create Banner(Admin)",
+            "id": "ce083856-644f-4292-8708-b02782bd4789",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "banner_type",
+                    "value": "HOME_TOP",
+                    "description": "HOME_MIDDLE/SIDEBAR",
+                    "type": "text",
+                    "uuid": "53814c48-dcbc-4d19-b1fd-e9acbf26f3ea"
+                  },
+                  {
+                    "key": "title",
+                    "value": "asd",
+                    "type": "text",
+                    "uuid": "040153e4-bad4-4b76-94b3-f366f7f44544"
+                  },
+                  {
+                    "key": "subtitle",
+                    "value": "asd",
+                    "type": "text",
+                    "uuid": "4ae1e8d5-e05b-4fcb-b7ed-7a6c2fcacbac"
+                  },
+                  {
+                    "key": "link_url",
+                    "value": "https//hy.com",
+                    "type": "text",
+                    "uuid": "7df05a37-d6b5-4b3f-af47-8458fe550798"
+                  },
+                  {
+                    "key": "sort_order",
+                    "value": "asd",
+                    "type": "text",
+                    "uuid": "df3c8d7e-f5bc-4c9d-b783-a1edeb3873d4"
+                  },
+                  {
+                    "key": "is_active",
+                    "value": "1",
+                    "type": "text",
+                    "uuid": "71d4fb50-ed77-4ae9-b1e1-251c202212cd"
+                  },
+                  {
+                    "key": "image",
+                    "type": "file",
+                    "uuid": "376a41a3-d658-46e4-bec4-85c64113a0e5",
+                    "src": "postman-cloud:///1f0eac86-9048-4cb0-9b78-e04e1d878d7f"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/banners/create",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "banners",
+                  "create"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T06:16:59.000Z",
+            "updatedAt": "2026-01-06T06:27:18.000Z",
+            "uid": "44267784-ce083856-644f-4292-8708-b02782bd4789"
+          },
+          {
+            "name": "UpdateBanner(Admin)",
+            "id": "3d939add-1442-44bd-ab34-4d58418a32d2",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "banner_type",
+                    "value": "HOME_TOP",
+                    "description": "HOME_MIDDLE/SIDEBAR",
+                    "type": "text",
+                    "uuid": "53814c48-dcbc-4d19-b1fd-e9acbf26f3ea"
+                  },
+                  {
+                    "key": "title",
+                    "value": "asd",
+                    "type": "text",
+                    "uuid": "040153e4-bad4-4b76-94b3-f366f7f44544"
+                  },
+                  {
+                    "key": "subtitle",
+                    "value": "asd",
+                    "type": "text",
+                    "uuid": "4ae1e8d5-e05b-4fcb-b7ed-7a6c2fcacbac"
+                  },
+                  {
+                    "key": "link_url",
+                    "value": "https//hy.com",
+                    "type": "text",
+                    "uuid": "7df05a37-d6b5-4b3f-af47-8458fe550798"
+                  },
+                  {
+                    "key": "sort_order",
+                    "value": "asd",
+                    "type": "text",
+                    "uuid": "df3c8d7e-f5bc-4c9d-b783-a1edeb3873d4"
+                  },
+                  {
+                    "key": "is_active",
+                    "value": "1",
+                    "type": "text",
+                    "uuid": "71d4fb50-ed77-4ae9-b1e1-251c202212cd"
+                  },
+                  {
+                    "key": "image",
+                    "type": "file",
+                    "uuid": "376a41a3-d658-46e4-bec4-85c64113a0e5",
+                    "src": "postman-cloud:///1f0eac86-9048-4cb0-9b78-e04e1d878d7f"
+                  },
+                  {
+                    "key": "id",
+                    "value": "",
+                    "type": "text",
+                    "uuid": "b309cbd0-a32c-47bd-b93a-912442382aa6"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/banners/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "banners",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T06:27:42.000Z",
+            "updatedAt": "2026-01-06T06:34:05.000Z",
+            "uid": "44267784-3d939add-1442-44bd-ab34-4d58418a32d2"
+          }
+        ],
+        "id": "8ba2b0fa-098d-4661-b071-641ae7141635",
+        "createdAt": "2026-01-06T06:16:59.000Z",
+        "updatedAt": "2026-01-06T06:28:22.000Z",
+        "uid": "44267784-8ba2b0fa-098d-4661-b071-641ae7141635"
+      },
+      {
+        "name": "CMS Pages",
+        "item": [
+          {
+            "name": "Get Page (Public)",
+            "id": "5d6cdcb5-9fa5-41db-95eb-d08e58d3a884",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/pages/about-us",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "pages",
+                  "about-us"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T05:15:23.000Z",
+            "uid": "44267784-5d6cdcb5-9fa5-41db-95eb-d08e58d3a884"
+          },
+          {
+            "name": "Update Page (Admin)",
+            "id": "26053561-3cf7-41d5-9c39-e4e1a242ebb5",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"page_key\": \"ABOUT_US\",\n  \"title\": \"About Stokai\",\n  \"content\": \"\u003Ch1\u003EAbout Us\u003C/h1\u003E\\n\\n\u003Cp\u003E\\nWelcome to \u003Cstrong\u003EStokai\u003C/strong\u003E — a modern digital commerce platform built to deliver\\nquality products, transparent pricing, and a seamless shopping experience.\\n\u003C/p\u003E\\n\\n\u003Ch2\u003EWho We Are\u003C/h2\u003E\\n\\n\u003Cp\u003E\\nStokai is a customer-first brand focused on combining technology, trust, and convenience.\\nWe believe shopping should be simple, fast, and reliable — whether you are browsing,\\ncomparing, or purchasing.\\n\u003C/p\u003E\\n\\n\u003Cp\u003E\\nOur platform is designed to bring together carefully selected products, competitive pricing,\\nand efficient delivery, all supported by a robust digital infrastructure.\\n\u003C/p\u003E\\n\\n\u003Ch2\u003EOur Mission\u003C/h2\u003E\\n\\n\u003Cp\u003E\\nOur mission is to make everyday shopping smarter by offering:\\n\u003C/p\u003E\\n\\n\u003Cul\u003E\\n  \u003Cli\u003EHigh-quality products from trusted sources\u003C/li\u003E\\n  \u003Cli\u003EFair and transparent pricing\u003C/li\u003E\\n  \u003Cli\u003EFast, secure, and reliable service\u003C/li\u003E\\n  \u003Cli\u003EA seamless digital experience across devices\u003C/li\u003E\\n\u003C/ul\u003E\\n\\n\u003Ch2\u003EWhy Choose Stokai\u003C/h2\u003E\\n\\n\u003Cul\u003E\\n  \u003Cli\u003E\u003Cstrong\u003EQuality Assurance:\u003C/strong\u003E Every product goes through quality checks before listing.\u003C/li\u003E\\n  \u003Cli\u003E\u003Cstrong\u003EBest Value:\u003C/strong\u003E We balance affordability with premium quality.\u003C/li\u003E\\n  \u003Cli\u003E\u003Cstrong\u003ESecure Payments:\u003C/strong\u003E Your transactions are protected with industry-standard security.\u003C/li\u003E\\n  \u003Cli\u003E\u003Cstrong\u003ECustomer Support:\u003C/strong\u003E Dedicated support to assist you at every step.\u003C/li\u003E\\n\u003C/ul\u003E\\n\\n\u003Ch2\u003ETechnology & Innovation\u003C/h2\u003E\\n\\n\u003Cp\u003E\\nStokai is powered by a modern technology stack that ensures speed, reliability,\\nand scalability. Our systems are continuously optimized to provide a smooth experience,\\nfrom browsing products to completing orders.\\n\u003C/p\u003E\\n\\n\u003Ch2\u003EOur Commitment\u003C/h2\u003E\\n\\n\u003Cp\u003E\\nWe are committed to building long-term relationships with our customers by focusing on\\ntrust, transparency, and continuous improvement. Your feedback helps us grow and improve\\nevery day.\\n\u003C/p\u003E\\n\\n\u003Ch2\u003ELooking Ahead\u003C/h2\u003E\\n\\n\u003Cp\u003E\\nAs we continue to grow, our vision remains clear — to become a trusted digital destination\\nthat customers can rely on for quality products and dependable service.\\n\u003C/p\u003E\\n\\n\u003Cp\u003E\\nThank you for choosing \u003Cstrong\u003EStokai\u003C/strong\u003E.\\n\u003C/p\u003E\"\n}\n"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/pages/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "pages",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-06T06:34:00.000Z",
+            "uid": "44267784-26053561-3cf7-41d5-9c39-e4e1a242ebb5"
+          }
+        ],
+        "id": "85c79aa3-7ac0-4dd4-96db-5894ae8b5c7a",
+        "createdAt": "2026-01-06T05:15:23.000Z",
+        "updatedAt": "2026-01-06T05:15:23.000Z",
+        "uid": "44267784-85c79aa3-7ac0-4dd4-96db-5894ae8b5c7a"
+      },
+      {
+        "name": "init with admin",
+        "item": [
+          {
+            "name": "init",
+            "id": "3a107cb0-bbd8-4286-b19f-aa72892bdc6a",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/pages/about-us",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "pages",
+                  "about-us"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-06T06:38:09.000Z",
+            "updatedAt": "2026-01-06T07:42:32.000Z",
+            "uid": "44267784-3a107cb0-bbd8-4286-b19f-aa72892bdc6a"
+          }
+        ],
+        "id": "1e214af5-5031-41fd-8a0a-0dcd0da2f8da",
+        "createdAt": "2026-01-06T06:37:50.000Z",
+        "updatedAt": "2026-01-06T06:38:09.000Z",
+        "uid": "44267784-1e214af5-5031-41fd-8a0a-0dcd0da2f8da"
+      }
+    ],
+    "event": [
+      {
+        "listen": "prerequest",
+        "script": {
+          "id": "21860597-d8bd-4c76-8c38-a8df0ea694a7",
+          "type": "text/javascript",
+          "packages": {
+
+          },
+          "requests": {
+
+          },
+          "exec": [
+            ""
+          ]
+        }
+      },
+      {
+        "listen": "test",
+        "script": {
+          "id": "61eaa7e9-a6b7-457a-88e2-f7c93cc8e509",
+          "type": "text/javascript",
+          "packages": {
+
+          },
+          "requests": {
+
+          },
+          "exec": [
+            ""
+          ]
+        }
+      }
+    ],
+    "variable": [
+      {
+        "key": "base_url",
+        "value": ""
+      },
+      {
+        "key": "token",
+        "value": ""
+      }
+    ]
+  }
+}
