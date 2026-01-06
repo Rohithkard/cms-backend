@@ -54,56 +54,53 @@ class CompanyController
        ADMIN – UPDATE COMPANY
     ========================= */
     public static function update(): void
-    {
-        require_admin();
-        $body = get_json_body();
+{
+    require_admin();
+    $body = get_json_body();
 
-        $allowed = [
-            "company_name",
-            "logo_url",
-            "favicon_url",
-            "phone",
-            "email",
-            "address",
-            "website",
-            "map_url",
-            "whatsapp",
-            "facebook",
-            "instagram",
-            "youtube",
-            "linkedin",
-            "primary_color",
-            "secondary_color",
-            "background_color",
-            "text_color",
-            "footer_text"
-        ];
+    // ✅ ONLY company_info fields
+    $allowed = [
+        "company_name",
+        "logo_url",
+        "phone",
+        "email",
+        "address",
+        "website",
+        "map_url",
+        "whatsapp",
+        "facebook",
+        "instagram",
+        "youtube",
+        "linkedin"
+    ];
 
-        $set = [];
-        $params = [];
+    $set = [];
+    $params = [];
 
-        foreach ($allowed as $field) {
-            if (array_key_exists($field, $body)) {
-                $set[] = "$field = ?";
-                $params[] = $body[$field];
-            }
+    foreach ($allowed as $field) {
+        if (array_key_exists($field, $body)) {
+            $set[] = "$field = ?";
+            $params[] = $body[$field];
         }
-
-        if (!$set) {
-            json_response([
-                "success" => false,
-                "message" => "No fields provided"
-            ], 400);
-        }
-
-        $sql = "UPDATE company_info SET " . implode(",", $set) . " LIMIT 1";
-        db()->prepare($sql)->execute($params);
-
-        json_response([
-            "success" => true,
-            "message" => "Company information updated"
-        ]);
     }
+
+    if (!$set) {
+        json_response([
+            "success" => false,
+            "message" => "No fields provided"
+        ], 400);
+    }
+
+    db()->prepare(
+        "UPDATE company_info SET " . implode(",", $set) . " LIMIT 1"
+    )->execute($params);
+
+    json_response([
+        "success" => true,
+        "message" => "Company information updated"
+    ]);
+}
+
 
     /* =========================
        ADMIN – IMAGE UPLOAD

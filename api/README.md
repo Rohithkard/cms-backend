@@ -194,4 +194,114 @@ VPS
 
 Docker (optional)
 
+🟢 APACHE (cPanel / XAMPP / Shared Hosting) SUPPORT
+
+This project also works fully on Apache (no NGINX required).
+
+🧩 APACHE REQUIREMENTS
+
+Apache 2.4+
+
+PHP 8.1+
+
+mod_rewrite enabled
+
+.htaccess allowed (AllowOverride All)
+
+MySQL / MariaDB
+
+📁 APACHE DEPLOYMENT STRUCTURE
+
+Upload project like this:
+
+/public_html/
+├── api/
+│   ├── config/
+│   ├── core/
+│   ├── controllers/
+│   ├── routes/
+│   ├── uploads/
+│   └── public/
+│       └── index.php
+
+
+👉 Document root must point to:
+
+/public_html/api/public
+
+
+If you cannot change document root (shared hosting), use .htaccess (below).
+
+🧾 .htaccess (REQUIRED FOR APACHE)
+
+Create this file in:
+
+/public_html/api/public/.htaccess
+
+✅ .htaccess CONTENT
+RewriteEngine On
+
+# Force HTTPS (optional)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Allow direct access to uploads
+RewriteCond %{REQUEST_URI} ^/uploads/ [NC]
+RewriteRule .* - [L]
+
+# Route all API requests to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+///End HT ACCESS
+
+📦 SERVE UPLOADED IMAGES (IMPORTANT)
+
+Apache automatically serves files from uploads/
+No alias needed like NGINX.
+
+Images will be accessible at:
+
+https://yourdomain.com/uploads/filename.png
+
+
+Make sure permissions are correct:
+
+chmod -R 775 api/uploads
+
+🔧 PHP SETTINGS (RECOMMENDED)
+
+Ensure these are enabled in php.ini or hosting panel:
+
+file_uploads = On
+upload_max_filesize = 10M
+post_max_size = 12M
+max_execution_time = 120
+
+🔐 AUTH & API USAGE (SAME AS NGINX)
+
+No changes required.
+
+POST /auth/login
+Authorization: Bearer {token}
+
+🆚 NGINX vs APACHE (SUMMARY)
+Feature	NGINX	Apache
+Routing	try_files	.htaccess
+Uploads	alias	direct
+Performance	Higher	Medium
+Shared hosting	❌	✅
+✅ FINAL NOTE FOR CLIENT
+
+NGINX → Best for VPS / cloud
+
+Apache → Best for cPanel / shared hosting
+
+Same codebase works on both
+
+No framework lock-in
+
+Easy migration
+
 Happy deploying 🚀
