@@ -10,17 +10,17 @@ class ProductController
     /* =========================
        PUBLIC LIST
     ========================= */
-  public static function viewPublic(): void
-{
-    $pdo = db();
-    $id = (int)($_GET["id"] ?? 0);
-    $slug = trim($_GET["slug"] ?? "");
+    public static function viewPublic(): void
+    {
+        $pdo = db();
+        $id = (int) ($_GET["id"] ?? 0);
+        $slug = trim($_GET["slug"] ?? "");
 
-    if (!$id && !$slug) {
-        json_response(["success" => false, "message" => "id or slug required"], 400);
-    }
+        if (!$id && !$slug) {
+            json_response(["success" => false, "message" => "id or slug required"], 400);
+        }
 
-    $sql = "
+        $sql = "
         SELECT
             p.*,
             c.name AS category_name,
@@ -38,76 +38,76 @@ class ProductController
         WHERE p.is_active = 1
     ";
 
-    if ($id) {
-        $sql .= " AND p.id = ? LIMIT 1";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$id]);
-    } else {
-        $sql .= " AND p.slug = ? LIMIT 1";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$slug]);
-    }
+        if ($id) {
+            $sql .= " AND p.id = ? LIMIT 1";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$id]);
+        } else {
+            $sql .= " AND p.slug = ? LIMIT 1";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$slug]);
+        }
 
-    $row = $stmt->fetch();
-    if (!$row) {
-        json_response(["success" => false, "message" => "Not found"], 404);
-    }
+        $row = $stmt->fetch();
+        if (!$row) {
+            json_response(["success" => false, "message" => "Not found"], 404);
+        }
 
-    // ✅ ADD IMAGES
-    $imgs = $pdo->prepare("
+        // ✅ ADD IMAGES
+        $imgs = $pdo->prepare("
         SELECT id, image_url, is_primary
         FROM product_images
         WHERE product_id = ?
         ORDER BY is_primary DESC, sort_order ASC
     ");
-    $imgs->execute([$row["id"]]);
+        $imgs->execute([$row["id"]]);
 
-    $images = $imgs->fetchAll();
-    foreach ($images as &$img) {
-        $img["image_url"] = asset_url($img["image_url"]);
+        $images = $imgs->fetchAll();
+        foreach ($images as &$img) {
+            $img["image_url"] = asset_url($img["image_url"]);
+        }
+
+        $row["images"] = $images;
+
+        json_response([
+            "success" => true,
+            "data" => $row
+        ]);
     }
 
-    $row["images"] = $images;
+    public static function listPublic(): void
+    {
+        $pdo = db();
 
-    json_response([
-        "success" => true,
-        "data" => $row
-    ]);
-}
+        $q = trim($_GET["q"] ?? "");
+        $categoryId = (int) ($_GET["category_id"] ?? 0);
+        $onlyOffer = (int) ($_GET["only_offer"] ?? 0);
 
-public static function listPublic(): void
-{
-    $pdo = db();
+        $limit = min(100, max(1, (int) ($_GET["limit"] ?? 30)));
+        $offset = max(0, (int) ($_GET["offset"] ?? 0));
 
-    $q = trim($_GET["q"] ?? "");
-    $categoryId = (int)($_GET["category_id"] ?? 0);
-    $onlyOffer = (int)($_GET["only_offer"] ?? 0);
+        $where = "p.is_active = 1";
+        $params = [];
 
-    $limit = min(100, max(1, (int)($_GET["limit"] ?? 30)));
-    $offset = max(0, (int)($_GET["offset"] ?? 0));
+        if ($q !== "") {
+            $where .= " AND (p.name LIKE ? OR p.description LIKE ? OR p.sku LIKE ?)";
+            $params[] = "%$q%";
+            $params[] = "%$q%";
+            $params[] = "%$q%";
+        }
 
-    $where = "p.is_active = 1";
-    $params = [];
+        if ($categoryId > 0) {
+            $where .= " AND p.category_id = ?";
+            $params[] = $categoryId;
+        }
 
-    if ($q !== "") {
-        $where .= " AND (p.name LIKE ? OR p.description LIKE ? OR p.sku LIKE ?)";
-        $params[] = "%$q%";
-        $params[] = "%$q%";
-        $params[] = "%$q%";
-    }
-
-    if ($categoryId > 0) {
-        $where .= " AND p.category_id = ?";
-        $params[] = $categoryId;
-    }
-
-    if ($onlyOffer === 1) {
-        $where .= " AND p.offer_price IS NOT NULL
+        if ($onlyOffer === 1) {
+            $where .= " AND p.offer_price IS NOT NULL
                     AND (p.offer_start IS NULL OR p.offer_start <= NOW())
                     AND (p.offer_end IS NULL OR p.offer_end >= NOW())";
-    }
+        }
 
-    $sql = "
+        $sql = "
         SELECT
             p.*,
             c.name AS category_name,
@@ -140,96 +140,126 @@ public static function listPublic(): void
         LIMIT $limit OFFSET $offset
     ";
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($params);
-    $rows = $stmt->fetchAll();
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        $rows = $stmt->fetchAll();
 
-    // ✅ ADD IMAGES
-    foreach ($rows as &$row) {
-        $imgs = $pdo->prepare("
+        // ✅ ADD IMAGES
+        foreach ($rows as &$row) {
+            $imgs = $pdo->prepare("
             SELECT id, image_url, is_primary
             FROM product_images
             WHERE product_id = ?
             ORDER BY is_primary DESC, sort_order ASC
         ");
-        $imgs->execute([$row["id"]]);
+            $imgs->execute([$row["id"]]);
 
-        $images = $imgs->fetchAll();
-        foreach ($images as &$img) {
-            $img["image_url"] = asset_url($img["image_url"]);
+            $images = $imgs->fetchAll();
+            foreach ($images as &$img) {
+                $img["image_url"] = asset_url($img["image_url"]);
+            }
+
+            $row["images"] = $images;
         }
 
-        $row["images"] = $images;
+        json_response([
+            "success" => true,
+            "data" => $rows
+        ]);
     }
-
-    json_response([
-        "success" => true,
-        "data" => $rows
-    ]);
-}
 
 
 
     public static function uploadImage(): void
-{
-    require_admin();
+    {
+        require_admin();
 
-    $productId = (int)($_POST["product_id"] ?? 0);
-    if (!$productId) {
-        json_response(["success" => false, "message" => "product_id required"], 400);
-    }
+        $productId = (int) ($_POST["product_id"] ?? 0);
+        if (!$productId) {
+            json_response([
+                "success" => false,
+                "message" => "product_id required"
+            ], 400);
+        }
 
-    // Upload image
-    $res = handle_image_upload("image");
-    if (!$res["ok"]) {
-        json_response(["success" => false, "message" => $res["message"]], 400);
-    }
+        // ✅ VERIFY PRODUCT EXISTS AND IS ACTIVE
+        $chk = db()->prepare("
+        SELECT id, is_active
+        FROM products
+        WHERE id = ?
+        LIMIT 1
+    ");
+        $chk->execute([$productId]);
+        $product = $chk->fetch();
 
-    $imageUrl = $res["url"];
-    $sort = (int)($_POST["sort_order"] ?? 0);
-    $primary = (int)($_POST["is_primary"] ?? 0);
+        if (!$product) {
+            json_response([
+                "success" => false,
+                "message" => "Invalid product_id"
+            ], 400);
+        }
 
-    // If primary → unset other primary images
-    if ($primary === 1) {
-        db()->prepare(
-            "UPDATE product_images SET is_primary = 0 WHERE product_id = ?"
-        )->execute([$productId]);
-    }
+        if ((int) $product["is_active"] !== 1) {
+            json_response([
+                "success" => false,
+                "message" => "Product is not active"
+            ], 400);
+        }
 
-    db()->prepare("
+        // 📷 Upload image
+        $res = handle_image_upload("image");
+        if (!$res["ok"]) {
+            json_response([
+                "success" => false,
+                "message" => $res["message"]
+            ], 400);
+        }
+
+        $imageUrl = $res["url"];
+        $sort = (int) ($_POST["sort_order"] ?? 0);
+        $primary = (int) ($_POST["is_primary"] ?? 0);
+
+        // If primary → unset other primary images
+        if ($primary === 1) {
+            db()->prepare(
+                "UPDATE product_images SET is_primary = 0 WHERE product_id = ?"
+            )->execute([$productId]);
+        }
+
+        db()->prepare("
         INSERT INTO product_images (product_id, image_url, sort_order, is_primary)
         VALUES (?, ?, ?, ?)
     ")->execute([$productId, $imageUrl, $sort, $primary]);
 
-    json_response([
-        "success" => true,
-        "message" => "Image uploaded",
-        "image_url" => asset_url($imageUrl)
-    ]);
-}
-
-public static function deleteImage(): void
-{
-    require_admin();
-    $b = get_json_body();
-    $id = (int)($b["id"] ?? 0);
-
-    if (!$id) {
-        json_response(["success" => false, "message" => "image id required"], 400);
+        json_response([
+            "success" => true,
+            "message" => "Image uploaded",
+            "image_url" => asset_url($imageUrl)
+        ]);
     }
 
-    db()->prepare("DELETE FROM product_images WHERE id = ?")->execute([$id]);
+    public static function deleteImage(): void
+    {
+        require_admin();
+        $b = get_json_body();
+        $id = (int) ($b["id"] ?? 0);
 
-    json_response([
-        "success" => true,
-        "message" => "Image deleted"
-    ]);
-}
+        if (!$id) {
+            json_response(["success" => false, "message" => "image id required"], 400);
+        }
+
+        db()->prepare("DELETE FROM product_images WHERE id = ?")->execute([$id]);
+
+        json_response([
+            "success" => true,
+            "message" => "Image deleted"
+        ]);
+    }
 
     /* =========================
        PUBLIC VIEW
     ========================= */
-  
+
 
     /* =========================
        ADMIN LIST
@@ -250,32 +280,32 @@ public static function deleteImage(): void
     /* =========================
        CREATE
     ========================= */
-  public static function create(): void
-{
-    require_admin();
-    $b = get_json_body();
+    public static function create(): void
+    {
+        require_admin();
+        $b = get_json_body();
 
-    $name = trim($b["name"] ?? "");
-    if (!$name) {
-        json_response(["success" => false, "message" => "name required"], 400);
-    }
-
-    $slug = $b["slug"] ?? slugify($name);
-
-    // ✅ VALIDATE CATEGORY (NEW)
-    $categoryId = $b["category_id"] ?? null;
-    if ($categoryId !== null) {
-        $chk = db()->prepare("SELECT id FROM categories WHERE id = ? LIMIT 1");
-        $chk->execute([$categoryId]);
-        if (!$chk->fetch()) {
-            json_response([
-                "success" => false,
-                "message" => "Invalid category_id"
-            ], 400);
+        $name = trim($b["name"] ?? "");
+        if (!$name) {
+            json_response(["success" => false, "message" => "name required"], 400);
         }
-    }
 
-    $stmt = db()->prepare("
+        $slug = $b["slug"] ?? slugify($name);
+
+        // ✅ VALIDATE CATEGORY (NEW)
+        $categoryId = $b["category_id"] ?? null;
+        if ($categoryId !== null) {
+            $chk = db()->prepare("SELECT id FROM categories WHERE id = ? LIMIT 1");
+            $chk->execute([$categoryId]);
+            if (!$chk->fetch()) {
+                json_response([
+                    "success" => false,
+                    "message" => "Invalid category_id"
+                ], 400);
+            }
+        }
+
+        $stmt = db()->prepare("
         INSERT INTO products (
           name, slug, image_url, description, short_description, sku,
           price, mrp, offer_price, offer_start, offer_end,
@@ -283,89 +313,102 @@ public static function deleteImage(): void
         ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     ");
 
-    $stmt->execute([
-        $name,
-        $slug,
-        $b["image_url"] ?? null,
-        $b["description"] ?? null,
-        $b["short_description"] ?? null,
-        $b["sku"] ?? null,
-        $b["price"] ?? null,
-        $b["mrp"] ?? null,
-        $b["offer_price"] ?? null,
-        $b["offer_start"] ?? null,
-        $b["offer_end"] ?? null,
-        $b["stock"] ?? null,
-        $b["unit"] ?? null,
-        $categoryId, // ✅ SAFE
-        $b["brand"] ?? null,
-        (int)($b["is_active"] ?? 1)
-    ]);
+        $stmt->execute([
+            $name,
+            $slug,
+            $b["image_url"] ?? null,
+            $b["description"] ?? null,
+            $b["short_description"] ?? null,
+            $b["sku"] ?? null,
+            $b["price"] ?? null,
+            $b["mrp"] ?? null,
+            $b["offer_price"] ?? null,
+            $b["offer_start"] ?? null,
+            $b["offer_end"] ?? null,
+            $b["stock"] ?? null,
+            $b["unit"] ?? null,
+            $categoryId, // ✅ SAFE
+            $b["brand"] ?? null,
+            (int) ($b["is_active"] ?? 1)
+        ]);
 
-    json_response([
-        "success" => true,
-        "message" => "Product created",
-        "id" => (int)db()->lastInsertId(),
-        "slug" => $slug
-    ]);
-}
+        json_response([
+            "success" => true,
+            "message" => "Product created",
+            "id" => (int) db()->lastInsertId(),
+            "slug" => $slug
+        ]);
+    }
 
 
     /* =========================
        UPDATE
     ========================= */
-   public static function update(): void
-{
-    require_admin();
-    $b = get_json_body();
+    public static function update(): void
+    {
+        require_admin();
+        $b = get_json_body();
 
-    $id = (int)($b["id"] ?? 0);
-    if (!$id) {
-        json_response(["success" => false, "message" => "id required"], 400);
-    }
-
-    // ✅ VALIDATE CATEGORY IF PROVIDED
-    if (array_key_exists("category_id", $b) && $b["category_id"] !== null) {
-        $chk = db()->prepare("SELECT id FROM categories WHERE id = ? LIMIT 1");
-        $chk->execute([$b["category_id"]]);
-        if (!$chk->fetch()) {
-            json_response([
-                "success" => false,
-                "message" => "Invalid category_id"
-            ], 400);
+        $id = (int) ($b["id"] ?? 0);
+        if (!$id) {
+            json_response(["success" => false, "message" => "id required"], 400);
         }
-    }
 
-    $allowed = [
-        "name","slug","image_url","description","short_description","sku",
-        "price","mrp","offer_price","offer_start","offer_end",
-        "stock","unit","category_id","brand","is_active"
-    ];
-
-    $set = [];
-    $params = [];
-
-    foreach ($allowed as $k) {
-        if (array_key_exists($k, $b)) {
-            $set[] = "$k = ?";
-            $params[] = $b[$k];
+        // ✅ VALIDATE CATEGORY IF PROVIDED
+        if (array_key_exists("category_id", $b) && $b["category_id"] !== null) {
+            $chk = db()->prepare("SELECT id FROM categories WHERE id = ? LIMIT 1");
+            $chk->execute([$b["category_id"]]);
+            if (!$chk->fetch()) {
+                json_response([
+                    "success" => false,
+                    "message" => "Invalid category_id"
+                ], 400);
+            }
         }
+
+        $allowed = [
+            "name",
+            "slug",
+            "image_url",
+            "description",
+            "short_description",
+            "sku",
+            "price",
+            "mrp",
+            "offer_price",
+            "offer_start",
+            "offer_end",
+            "stock",
+            "unit",
+            "category_id",
+            "brand",
+            "is_active"
+        ];
+
+        $set = [];
+        $params = [];
+
+        foreach ($allowed as $k) {
+            if (array_key_exists($k, $b)) {
+                $set[] = "$k = ?";
+                $params[] = $b[$k];
+            }
+        }
+
+        if (!$set) {
+            json_response(["success" => false, "message" => "No fields provided"], 400);
+        }
+
+        $params[] = $id;
+        db()->prepare(
+            "UPDATE products SET " . implode(",", $set) . " WHERE id = ?"
+        )->execute($params);
+
+        json_response([
+            "success" => true,
+            "message" => "Product updated"
+        ]);
     }
-
-    if (!$set) {
-        json_response(["success" => false, "message" => "No fields provided"], 400);
-    }
-
-    $params[] = $id;
-    db()->prepare(
-        "UPDATE products SET " . implode(",", $set) . " WHERE id = ?"
-    )->execute($params);
-
-    json_response([
-        "success" => true,
-        "message" => "Product updated"
-    ]);
-}
 
     /* =========================
        DELETE
@@ -374,13 +417,50 @@ public static function deleteImage(): void
     {
         require_admin();
         $b = get_json_body();
-        $id = (int)($b["id"] ?? 0);
+        $id = (int) ($b["id"] ?? 0);
 
         if (!$id) {
-            json_response(["success" => false, "message" => "id required"], 400);
+            json_response([
+                "success" => false,
+                "message" => "id required"
+            ], 400);
         }
 
+        // ✅ VERIFY PRODUCT EXISTS
+        $chk = db()->prepare("
+        SELECT id, is_active
+        FROM products
+        WHERE id = ?
+        LIMIT 1
+    ");
+        $chk->execute([$id]);
+        $product = $chk->fetch();
+
+        if (!$product) {
+            json_response([
+                "success" => false,
+                "message" => "Invalid product id"
+            ], 400);
+        }
+
+        // OPTIONAL: prevent deleting inactive products (comment out if not needed)
+        /*
+        if ((int)$product["is_active"] !== 1) {
+            json_response([
+                "success" => false,
+                "message" => "Product is already inactive"
+            ], 400);
+        }
+        */
+
+        // ✅ DELETE PRODUCT
+        // (product_images will auto-delete via ON DELETE CASCADE)
         db()->prepare("DELETE FROM products WHERE id = ?")->execute([$id]);
-        json_response(["success" => true, "message" => "Product deleted"]);
+
+        json_response([
+            "success" => true,
+            "message" => "Product deleted"
+        ]);
     }
+
 }
