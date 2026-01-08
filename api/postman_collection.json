@@ -6,8 +6,8 @@
       "description": "Plain PHP CMS API (Auth, Company, Categories, Products, Banners, Pages)",
       "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
       "createdAt": "2026-01-06T05:15:22.000Z",
-      "updatedAt": "2026-01-06T07:41:58.000Z",
-      "lastUpdatedBy": "24423353",
+      "updatedAt": "2026-01-08T10:11:32.000Z",
+      "lastUpdatedBy": "44267784",
       "uid": "44267784-741a8857-f5e9-4aae-ab1e-d7c3cce961e4"
     },
     "item": [
@@ -155,7 +155,7 @@
                   {
                     "key": "image",
                     "type": "file",
-                    "src": "/D:/Application/images/pexels-andersonguerra-1197132.jpg"
+                    "src": "/D:/Application/greenagile/Green_Agile_logo.webp"
                   },
                   {
                     "key": "id",
@@ -179,7 +179,7 @@
             },
             "response": [],
             "createdAt": "2026-01-06T05:15:23.000Z",
-            "updatedAt": "2026-01-06T10:21:32.000Z",
+            "updatedAt": "2026-01-08T09:31:56.000Z",
             "uid": "44267784-e053e286-f944-42aa-adcc-585300264ca5"
           }
         ],
@@ -467,7 +467,7 @@
               "method": "GET",
               "header": [],
               "url": {
-                "raw": "{{base_url}}/products?category_id=1&only_offer=1",
+                "raw": "{{base_url}}/products?category_id=&only_offer=",
                 "host": [
                   "{{base_url}}"
                 ],
@@ -477,18 +477,18 @@
                 "query": [
                   {
                     "key": "category_id",
-                    "value": "1"
+                    "value": ""
                   },
                   {
                     "key": "only_offer",
-                    "value": "1"
+                    "value": ""
                   }
                 ]
               }
             },
             "response": [],
             "createdAt": "2026-01-06T05:15:23.000Z",
-            "updatedAt": "2026-01-06T05:15:23.000Z",
+            "updatedAt": "2026-01-07T12:36:25.000Z",
             "uid": "44267784-5578f025-3d2d-45ac-a056-b4735ca9941f"
           },
           {
@@ -692,11 +692,52 @@
             "createdAt": "2026-01-06T06:10:29.000Z",
             "updatedAt": "2026-01-06T06:14:05.000Z",
             "uid": "44267784-8753c463-8eef-40b2-8036-e5136f5b92f5"
+          },
+          {
+            "name": "Delete image for product(Admin)",
+            "id": "115b652b-8fe2-48b8-8a90-3bcd0b659f95",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}",
+                  "type": "text"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\r\n  \"id\": 6\r\n}\r\n",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/products/delete-image",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "products",
+                  "delete-image"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-07T13:13:23.000Z",
+            "updatedAt": "2026-01-08T09:31:58.000Z",
+            "uid": "44267784-115b652b-8fe2-48b8-8a90-3bcd0b659f95"
           }
         ],
         "id": "9ff8690f-26d5-4c0c-882e-fd17cbf97c02",
         "createdAt": "2026-01-06T05:15:23.000Z",
-        "updatedAt": "2026-01-06T06:10:29.000Z",
+        "updatedAt": "2026-01-07T13:13:23.000Z",
         "uid": "44267784-9ff8690f-26d5-4c0c-882e-fd17cbf97c02"
       },
       {
@@ -729,7 +770,7 @@
             },
             "response": [],
             "createdAt": "2026-01-06T06:16:59.000Z",
-            "updatedAt": "2026-01-06T06:26:51.000Z",
+            "updatedAt": "2026-01-08T09:31:56.000Z",
             "uid": "44267784-5f2a80be-7eb1-40c3-bf07-a5b34337c7c4"
           },
           {
@@ -857,7 +898,7 @@
                   },
                   {
                     "key": "link_url",
-                    "value": "https//hy.com",
+                    "value": "https://greenagile.co/wp-content/uploads/2025/10/agile_banner.jpg",
                     "type": "text",
                     "uuid": "7df05a37-d6b5-4b3f-af47-8458fe550798"
                   },
@@ -877,11 +918,11 @@
                     "key": "image",
                     "type": "file",
                     "uuid": "376a41a3-d658-46e4-bec4-85c64113a0e5",
-                    "src": "postman-cloud:///1f0eac86-9048-4cb0-9b78-e04e1d878d7f"
+                    "value": null
                   },
                   {
                     "key": "id",
-                    "value": "",
+                    "value": "2",
                     "type": "text",
                     "uuid": "b309cbd0-a32c-47bd-b93a-912442382aa6"
                   }
@@ -901,7 +942,7 @@
             },
             "response": [],
             "createdAt": "2026-01-06T06:27:42.000Z",
-            "updatedAt": "2026-01-06T06:34:05.000Z",
+            "updatedAt": "2026-01-07T12:00:07.000Z",
             "uid": "44267784-3d939add-1442-44bd-ab34-4d58418a32d2"
           }
         ],
@@ -1016,6 +1057,1196 @@
         "createdAt": "2026-01-06T06:37:50.000Z",
         "updatedAt": "2026-01-06T06:38:09.000Z",
         "uid": "44267784-1e214af5-5031-41fd-8a0a-0dcd0da2f8da"
+      },
+      {
+        "name": "Public",
+        "item": [
+          {
+            "name": "Get Home Page",
+            "id": "e0e25f4c-7923-45a9-bddb-112ffec50a4d",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/home",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "home"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-e0e25f4c-7923-45a9-bddb-112ffec50a4d"
+          }
+        ],
+        "id": "9b5ff8dc-8d2e-42b7-b741-7436ee7eae79",
+        "createdAt": "2026-01-08T09:23:12.000Z",
+        "updatedAt": "2026-01-08T09:23:55.000Z",
+        "uid": "44267784-9b5ff8dc-8d2e-42b7-b741-7436ee7eae79"
+      },
+      {
+        "name": "Home Content",
+        "item": [
+          {
+            "name": "Get Home Content",
+            "id": "883dfc24-b415-4b8d-a7f4-a9cfe06549f3",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/admin/home/content",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "content"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-883dfc24-b415-4b8d-a7f4-a9cfe06549f3"
+          },
+          {
+            "name": "Update Home Content",
+            "id": "6188c690-4e4d-4301-8a0e-27569a601db9",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"about_title\": \"About Us\",\n  \"about_text\": \"\u003Cp\u003EShort about content\u003C/p\u003E\",\n  \"why_title\": \"Why Choose Us\",\n  \"map_embed_url\": \"https://www.google.com/maps/embed?...\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/content/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "content",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-6188c690-4e4d-4301-8a0e-27569a601db9"
+          }
+        ],
+        "id": "8ae95511-e1ed-4792-98a2-2359c47ab775",
+        "createdAt": "2026-01-08T09:23:12.000Z",
+        "updatedAt": "2026-01-08T09:23:55.000Z",
+        "uid": "44267784-8ae95511-e1ed-4792-98a2-2359c47ab775"
+      },
+      {
+        "name": "Why Choose Us",
+        "item": [
+          {
+            "name": "List Why Points",
+            "id": "b2011b1b-a4c4-44b0-bb0b-7dc15bcc839b",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/admin/home/why",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "why"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-b2011b1b-a4c4-44b0-bb0b-7dc15bcc839b"
+          },
+          {
+            "name": "Create Why Point",
+            "id": "c3ffb29c-93ae-454a-adb6-c9134f263322",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "title",
+                    "value": "Fast Delivery",
+                    "type": "text"
+                  },
+                  {
+                    "key": "description",
+                    "value": "Quick & reliable shipping",
+                    "type": "text"
+                  },
+                  {
+                    "key": "sort_order",
+                    "value": "1",
+                    "type": "text"
+                  },
+                  {
+                    "key": "icon",
+                    "type": "file",
+                    "src": "/C:/Users/ridhu/Downloads/400545d8-198e-4008-a126-da86ec371947.jpg"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/why/create",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "why",
+                  "create"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:26:03.000Z",
+            "uid": "44267784-c3ffb29c-93ae-454a-adb6-c9134f263322"
+          },
+          {
+            "name": "Update Why Point",
+            "id": "e4100929-dfd8-4af7-bfd5-7f44c1ac4cb0",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "type": "text"
+                  },
+                  {
+                    "key": "title",
+                    "value": "Secure Payments",
+                    "type": "text"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/why/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "why",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-e4100929-dfd8-4af7-bfd5-7f44c1ac4cb0"
+          },
+          {
+            "name": "Delete Why Point",
+            "id": "fe69ba2a-ab85-4cae-97d2-be8e8e3193fd",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{ \"id\": 1 }"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/why/delete",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "why",
+                  "delete"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-fe69ba2a-ab85-4cae-97d2-be8e8e3193fd"
+          }
+        ],
+        "id": "e59cdb89-41f1-4e72-b03e-891c50531660",
+        "createdAt": "2026-01-08T09:23:12.000Z",
+        "updatedAt": "2026-01-08T09:23:55.000Z",
+        "uid": "44267784-e59cdb89-41f1-4e72-b03e-891c50531660"
+      },
+      {
+        "name": "Testimonials",
+        "item": [
+          {
+            "name": "List Testimonials",
+            "id": "3a354090-4449-490c-bc9e-eafd9fb56323",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/admin/home/testimonials",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "testimonials"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:59:25.000Z",
+            "uid": "44267784-3a354090-4449-490c-bc9e-eafd9fb56323"
+          },
+          {
+            "name": "Create Testimonial",
+            "id": "7ad76468-3fa7-4083-a99c-e282a7b32088",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "name",
+                    "value": "Rahul",
+                    "type": "text"
+                  },
+                  {
+                    "key": "message",
+                    "value": "Amazing service",
+                    "type": "text"
+                  },
+                  {
+                    "key": "rating",
+                    "value": "5",
+                    "type": "text"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/testimonials/create",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "testimonials",
+                  "create"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:58:43.000Z",
+            "uid": "44267784-7ad76468-3fa7-4083-a99c-e282a7b32088"
+          },
+          {
+            "name": "Update Testimonial",
+            "id": "da6d46f2-efa2-43ae-8f73-639165893b84",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "type": "text"
+                  },
+                  {
+                    "key": "message",
+                    "value": "Excellent support",
+                    "type": "text"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/testimonials/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "testimonials",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-da6d46f2-efa2-43ae-8f73-639165893b84"
+          },
+          {
+            "name": "Delete Testimonial",
+            "id": "c96d79cf-e268-479c-892d-de591931ced2",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{ \"id\": 1 }"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/testimonials/delete",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "testimonials",
+                  "delete"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-c96d79cf-e268-479c-892d-de591931ced2"
+          }
+        ],
+        "id": "dd470a5a-c171-461f-84bc-78f4363525ba",
+        "createdAt": "2026-01-08T09:23:12.000Z",
+        "updatedAt": "2026-01-08T09:23:55.000Z",
+        "uid": "44267784-dd470a5a-c171-461f-84bc-78f4363525ba"
+      },
+      {
+        "name": "Videos",
+        "item": [
+          {
+            "name": "List Videos",
+            "id": "48c565a9-03b4-4f9c-b34c-a68e7a878e26",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/admin/home/videos",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "videos"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-48c565a9-03b4-4f9c-b34c-a68e7a878e26"
+          },
+          {
+            "name": "Create Video",
+            "id": "967561e6-0382-4b0b-a143-4bd6764df484",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "title",
+                    "value": "Our Story",
+                    "type": "text"
+                  },
+                  {
+                    "key": "video_url",
+                    "value": "https://www.youtube.com/watch?v=TFTnJzWRTJ8",
+                    "type": "text"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/videos/create",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "videos",
+                  "create"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T10:01:34.000Z",
+            "uid": "44267784-967561e6-0382-4b0b-a143-4bd6764df484"
+          },
+          {
+            "name": "Update Video",
+            "id": "30d18428-1da4-47bc-91b0-097f5011b1bd",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "type": "text"
+                  },
+                  {
+                    "key": "title",
+                    "value": "Company Journeysdcdsa",
+                    "type": "text"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/videos/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "videos",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T10:02:24.000Z",
+            "uid": "44267784-30d18428-1da4-47bc-91b0-097f5011b1bd"
+          },
+          {
+            "name": "Delete Video",
+            "id": "10eb18be-a1ec-4f78-8a41-bf3a14981a0a",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{ \"id\": 1 }"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/videos/delete",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "videos",
+                  "delete"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-10eb18be-a1ec-4f78-8a41-bf3a14981a0a"
+          }
+        ],
+        "id": "62296290-3113-47d0-b162-07dfe046b98d",
+        "createdAt": "2026-01-08T09:23:12.000Z",
+        "updatedAt": "2026-01-08T09:23:55.000Z",
+        "uid": "44267784-62296290-3113-47d0-b162-07dfe046b98d"
+      },
+      {
+        "name": "FAQs",
+        "item": [
+          {
+            "name": "List FAQs",
+            "id": "7c032730-3de0-4d76-8204-03f5731e2def",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/admin/home/faqs",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "faqs"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:27:51.000Z",
+            "uid": "44267784-7c032730-3de0-4d76-8204-03f5731e2def"
+          },
+          {
+            "name": "Create FAQ",
+            "id": "445e0674-ac7e-45b6-b7b7-171c65dece7d",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "question",
+                    "value": "How fast is delivery????",
+                    "type": "text"
+                  },
+                  {
+                    "key": "answer",
+                    "value": "2–3 business dayssss",
+                    "type": "text"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/faqs/create",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "faqs",
+                  "create"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T10:03:43.000Z",
+            "uid": "44267784-445e0674-ac7e-45b6-b7b7-171c65dece7d"
+          },
+          {
+            "name": "Update FAQ",
+            "id": "498358d7-3247-43cc-980c-ca9019cb2fd5",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  {
+                    "key": "id",
+                    "value": "1",
+                    "type": "text"
+                  },
+                  {
+                    "key": "answer",
+                    "value": "Delivery within 15hours",
+                    "type": "text"
+                  }
+                ]
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/faqs/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "faqs",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T10:03:42.000Z",
+            "uid": "44267784-498358d7-3247-43cc-980c-ca9019cb2fd5"
+          },
+          {
+            "name": "Delete FAQ",
+            "id": "65c14af3-fd9a-4f00-b9a4-5869a69decc1",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{ \"id\": 1 }"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/home/faqs/delete",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "home",
+                  "faqs",
+                  "delete"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T09:23:12.000Z",
+            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "uid": "44267784-65c14af3-fd9a-4f00-b9a4-5869a69decc1"
+          }
+        ],
+        "id": "b7612ab3-ee25-422a-bc28-32d39e72e651",
+        "createdAt": "2026-01-08T09:23:12.000Z",
+        "updatedAt": "2026-01-08T09:23:55.000Z",
+        "uid": "44267784-b7612ab3-ee25-422a-bc28-32d39e72e651"
+      },
+      {
+        "name": "Contactus",
+        "item": [
+          {
+            "name": "Public",
+            "item": [
+              {
+                "name": "Create Contact Request",
+                "id": "c16a9416-154b-4cbc-a7f1-b04a8544f3ec",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"Rahul Kumar\",\n  \"email\": \"rahul@gmail.com\",\n  \"phone\": \"+91 9876543210\",\n  \"subject\": \"Bulk order enquiry\",\n  \"message\": \"I want to place a bulk order. Please contact me.\"\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/contact",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "contact"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-08T09:41:04.000Z",
+                "updatedAt": "2026-01-08T09:41:32.000Z",
+                "uid": "44267784-c16a9416-154b-4cbc-a7f1-b04a8544f3ec"
+              }
+            ],
+            "id": "6594c959-7f72-47c5-9f8e-806017daf76e",
+            "createdAt": "2026-01-08T09:41:04.000Z",
+            "updatedAt": "2026-01-08T09:41:32.000Z",
+            "uid": "44267784-6594c959-7f72-47c5-9f8e-806017daf76e"
+          },
+          {
+            "name": "Admin",
+            "item": [
+              {
+                "name": "List All Contact Requests",
+                "id": "f0f1b92b-ccf0-4373-8cda-72d3bcdf25bb",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "GET",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    }
+                  ],
+                  "url": {
+                    "raw": "{{base_url}}/admin/contact",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "contact"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-08T09:41:04.000Z",
+                "updatedAt": "2026-01-08T09:41:32.000Z",
+                "uid": "44267784-f0f1b92b-ccf0-4373-8cda-72d3bcdf25bb"
+              },
+              {
+                "name": "List New Contact Requests Only",
+                "id": "28630cee-d265-40a8-808e-88a8bbc64a75",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "GET",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    }
+                  ],
+                  "url": {
+                    "raw": "{{base_url}}/admin/contact?only_new=1",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "contact"
+                    ],
+                    "query": [
+                      {
+                        "key": "only_new",
+                        "value": "1"
+                      }
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-08T09:41:04.000Z",
+                "updatedAt": "2026-01-08T09:41:32.000Z",
+                "uid": "44267784-28630cee-d265-40a8-808e-88a8bbc64a75"
+              },
+              {
+                "name": "Mark Contacted",
+                "id": "757d238d-3959-418e-aa54-57d95c520fda",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"id\": 2\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/contact/mark",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "contact",
+                      "mark"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-08T09:41:04.000Z",
+                "updatedAt": "2026-01-08T10:07:20.000Z",
+                "uid": "44267784-757d238d-3959-418e-aa54-57d95c520fda"
+              },
+              {
+                "name": "Delete Contact Request",
+                "id": "539cc7e6-6bd0-4ce4-beec-8e1ffaf0b422",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"id\": 1\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/contact/delete",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "contact",
+                      "delete"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-08T09:41:04.000Z",
+                "updatedAt": "2026-01-08T09:41:32.000Z",
+                "uid": "44267784-539cc7e6-6bd0-4ce4-beec-8e1ffaf0b422"
+              }
+            ],
+            "id": "4eff7be3-095a-42f0-89ec-082ff56c2af4",
+            "createdAt": "2026-01-08T09:41:04.000Z",
+            "updatedAt": "2026-01-08T09:41:32.000Z",
+            "uid": "44267784-4eff7be3-095a-42f0-89ec-082ff56c2af4"
+          }
+        ],
+        "id": "cb8f1ac3-3066-42dd-8ee8-98a476ae9177",
+        "createdAt": "2026-01-08T09:41:19.000Z",
+        "updatedAt": "2026-01-08T09:41:32.000Z",
+        "uid": "44267784-cb8f1ac3-3066-42dd-8ee8-98a476ae9177"
+      },
+      {
+        "name": "Admin - Why Sub Points",
+        "item": [
+          {
+            "name": "List Sub Points",
+            "id": "feb1a972-1641-4eb3-9f0e-948ebfb66678",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/admin/why-subpoints?why_point_id=1",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "why-subpoints"
+                ],
+                "query": [
+                  {
+                    "key": "why_point_id",
+                    "value": "1"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T10:11:07.000Z",
+            "updatedAt": "2026-01-08T10:11:32.000Z",
+            "uid": "44267784-feb1a972-1641-4eb3-9f0e-948ebfb66678"
+          },
+          {
+            "name": "Create Sub Point",
+            "id": "6b082831-628e-4c03-b78c-89a1d35ec845",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"why_point_id\": 1,\n  \"question\": \"How fast is delivery?\",\n  \"answer\": \"Within 24–48 hours\",\n  \"sort_order\": 1,\n  \"is_active\": 1\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/why-subpoints/create",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "why-subpoints",
+                  "create"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T10:11:07.000Z",
+            "updatedAt": "2026-01-08T10:11:32.000Z",
+            "uid": "44267784-6b082831-628e-4c03-b78c-89a1d35ec845"
+          },
+          {
+            "name": "Update Sub Point",
+            "id": "a6f41c94-5134-4382-92f2-d69872dc0618",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": 1,\n  \"question\": \"How fast is shipping?\",\n  \"answer\": \"24–48 hours guaranteed\",\n  \"sort_order\": 1,\n  \"is_active\": 1\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/why-subpoints/update",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "why-subpoints",
+                  "update"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T10:11:07.000Z",
+            "updatedAt": "2026-01-08T10:11:32.000Z",
+            "uid": "44267784-a6f41c94-5134-4382-92f2-d69872dc0618"
+          },
+          {
+            "name": "Delete Sub Point",
+            "id": "6cfc1585-a718-466b-879f-b82ea40e7ea2",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": 1\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/why-subpoints/delete",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "admin",
+                  "why-subpoints",
+                  "delete"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-08T10:11:07.000Z",
+            "updatedAt": "2026-01-08T10:11:32.000Z",
+            "uid": "44267784-6cfc1585-a718-466b-879f-b82ea40e7ea2"
+          }
+        ],
+        "id": "1de174dc-1cf6-4e2f-bc64-24f6f49a34e6",
+        "createdAt": "2026-01-08T10:11:07.000Z",
+        "updatedAt": "2026-01-08T10:11:32.000Z",
+        "uid": "44267784-1de174dc-1cf6-4e2f-bc64-24f6f49a34e6"
       }
     ],
     "event": [
