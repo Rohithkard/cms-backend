@@ -1,4 +1,3 @@
-
 ---
 
 # 🗄️ `database.sql`
@@ -187,6 +186,21 @@ CREATE TABLE home_why_points (
   is_active TINYINT(1) DEFAULT 1
 );
 
+CREATE TABLE home_why_subpoints (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  why_point_id BIGINT UNSIGNED NOT NULL,
+  question VARCHAR(190) NOT NULL,
+  answer TEXT DEFAULT NULL,
+  sort_order INT DEFAULT 0,
+  is_active TINYINT(1) DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  CONSTRAINT fk_why_subpoints_parent
+    FOREIGN KEY (why_point_id)
+    REFERENCES home_why_points(id)
+    ON DELETE CASCADE
+);
+
 
 CREATE TABLE home_testimonials (
   id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -218,3 +232,14 @@ CREATE TABLE home_faqs (
   is_active TINYINT(1) DEFAULT 1
 );
 
+CREATE TABLE contact_requests (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(190) NOT NULL,
+  phone VARCHAR(50) DEFAULT NULL,
+  subject VARCHAR(190) DEFAULT NULL,
+  message TEXT NOT NULL,
+  is_contacted TINYINT(1) DEFAULT 0,
+  contacted_at DATETIME DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

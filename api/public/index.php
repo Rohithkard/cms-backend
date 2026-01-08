@@ -11,6 +11,7 @@ require_once __DIR__ . "/../controllers/CategoryController.php";
 require_once __DIR__ . "/../controllers/CompanyController.php";
 require_once __DIR__ . "/../controllers/ThemeController.php";
 require_once __DIR__ . "/../controllers/HomeController.php";
+require_once __DIR__ . "/../controllers/ContactController.php";
 
 
 
@@ -30,6 +31,8 @@ route("GET", "/setup/create-admin", fn() => CreateAdminController::createAdmin()
 route("GET", "/categories", fn() => CategoryController::listPublic());
 route("GET", "/company", fn() => CompanyController::getPublic());
 route("GET", "/theme", fn() => ThemeController::getPublic());
+route("POST", "/contact", fn() => ContactController::create());
+route("GET", "/home", fn()=>HomeController::get());
 
 
 
@@ -73,8 +76,7 @@ route("POST", "/admin/home/faqs/create", fn()=>HomeController::createFaq());
 route("POST", "/admin/home/faqs/update", fn()=>HomeController::updateFaq());
 route("POST", "/admin/home/faqs/delete", fn()=>HomeController::deleteFaq());
 
-// Public
-route("GET", "/home", fn()=>HomeController::get());
+
 
 // Admin – Home content
 route("GET",  "/admin/home/content", fn()=>HomeController::listContent());
@@ -91,6 +93,12 @@ route("GET",  "/admin/home/testimonials", fn()=>HomeController::listTestimonials
 route("POST", "/admin/home/testimonials/create", fn()=>HomeController::createTestimonial());
 route("POST", "/admin/home/testimonials/update", fn()=>HomeController::updateTestimonial());
 route("POST", "/admin/home/testimonials/delete", fn()=>HomeController::deleteTestimonial());
+route("GET",  "/admin/contact", fn() => ContactController::list());
+route("POST", "/admin/contact/mark", fn() => ContactController::markContacted());
+route("POST", "/admin/contact/delete", fn() => ContactController::delete());
+route("POST", "/admin/why-subpoints/create", fn()=>HomeController::createWhySub());
+route("POST", "/admin/why-subpoints/update", fn()=>HomeController::updateWhySub());
+route("POST", "/admin/why-subpoints/delete", fn()=>HomeController::deleteWhySub());
 
 
 
