@@ -163,3 +163,58 @@ INSERT INTO pages (page_key, title)
 VALUES ('ABOUT_US','About Us'),
        ('TERMS','Terms & Conditions'),
        ('PRIVACY','Privacy Policy');
+
+       CREATE TABLE home_content (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  about_title VARCHAR(190) DEFAULT NULL,
+  about_text LONGTEXT DEFAULT NULL,
+  why_title VARCHAR(190) DEFAULT NULL,
+  map_embed_url TEXT DEFAULT NULL,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO home_content (about_title, why_title)
+VALUES ('About Us', 'Why Choose Us');
+
+
+CREATE TABLE home_why_points (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(190) NOT NULL,
+  description TEXT DEFAULT NULL,
+  icon VARCHAR(120) DEFAULT NULL,
+  sort_order INT DEFAULT 0,
+  is_active TINYINT(1) DEFAULT 1
+);
+
+
+CREATE TABLE home_testimonials (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(120) NOT NULL,
+  role VARCHAR(120) DEFAULT NULL,
+  message TEXT NOT NULL,
+  image_url VARCHAR(255) DEFAULT NULL,
+  rating TINYINT DEFAULT 5,
+  sort_order INT DEFAULT 0,
+  is_active TINYINT(1) DEFAULT 1
+);
+
+
+CREATE TABLE home_videos (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(190) DEFAULT NULL,
+  video_url TEXT NOT NULL,
+  thumbnail_url VARCHAR(255) DEFAULT NULL,
+  sort_order INT DEFAULT 0,
+  is_active TINYINT(1) DEFAULT 1
+);
+
+
+CREATE TABLE home_faqs (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  question VARCHAR(255) NOT NULL,
+  answer TEXT NOT NULL,
+  sort_order INT DEFAULT 0,
+  is_active TINYINT(1) DEFAULT 1
+);
+

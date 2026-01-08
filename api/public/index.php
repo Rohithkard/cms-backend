@@ -10,6 +10,7 @@ require_once __DIR__ . "/../controllers/CreateAdminController.php";
 require_once __DIR__ . "/../controllers/CategoryController.php";
 require_once __DIR__ . "/../controllers/CompanyController.php";
 require_once __DIR__ . "/../controllers/ThemeController.php";
+require_once __DIR__ . "/../controllers/HomeController.php";
 
 
 
@@ -59,6 +60,37 @@ route("POST", "/admin/company/update", fn() => CompanyController::update());
 
 route("POST", "/admin/products/upload-image", fn() => ProductController::uploadImage());
 route("POST", "/admin/products/delete-image", fn() => ProductController::deleteImage());
+
+// Videos
+route("GET",  "/admin/home/videos", fn()=>HomeController::listVideos());
+route("POST", "/admin/home/videos/create", fn()=>HomeController::createVideo());
+route("POST", "/admin/home/videos/update", fn()=>HomeController::updateVideo());
+route("POST", "/admin/home/videos/delete", fn()=>HomeController::deleteVideo());
+
+// FAQ
+route("GET",  "/admin/home/faqs", fn()=>HomeController::listFaqs());
+route("POST", "/admin/home/faqs/create", fn()=>HomeController::createFaq());
+route("POST", "/admin/home/faqs/update", fn()=>HomeController::updateFaq());
+route("POST", "/admin/home/faqs/delete", fn()=>HomeController::deleteFaq());
+
+// Public
+route("GET", "/home", fn()=>HomeController::get());
+
+// Admin – Home content
+route("GET",  "/admin/home/content", fn()=>HomeController::listContent());
+route("POST", "/admin/home/content/update", fn()=>HomeController::updateContent());
+
+// Admin – Why choose us
+route("GET",  "/admin/home/why", fn()=>HomeController::listWhy());
+route("POST", "/admin/home/why/create", fn()=>HomeController::createWhy());
+route("POST", "/admin/home/why/update", fn()=>HomeController::updateWhy());
+route("POST", "/admin/home/why/delete", fn()=>HomeController::deleteWhy());
+
+// Admin – Testimonials
+route("GET",  "/admin/home/testimonials", fn()=>HomeController::listTestimonials());
+route("POST", "/admin/home/testimonials/create", fn()=>HomeController::createTestimonial());
+route("POST", "/admin/home/testimonials/update", fn()=>HomeController::updateTestimonial());
+route("POST", "/admin/home/testimonials/delete", fn()=>HomeController::deleteTestimonial());
 
 
 
