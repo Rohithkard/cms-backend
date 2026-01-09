@@ -395,6 +395,12 @@
                     "type": "file",
                     "uuid": "83dfbfba-cb8f-485d-8277-e0c0fb785167",
                     "value": null
+                  },
+                  {
+                    "key": "description",
+                    "value": "",
+                    "type": "text",
+                    "uuid": "a26a5a27-3fb4-4d3a-9d16-81c6c942588c"
                   }
                 ]
               },
@@ -412,7 +418,7 @@
             },
             "response": [],
             "createdAt": "2026-01-06T05:15:23.000Z",
-            "updatedAt": "2026-01-06T05:56:20.000Z",
+            "updatedAt": "2026-01-09T09:32:06.000Z",
             "uid": "44267784-30f0565c-7bd3-4776-b2d7-9fce88c1c285"
           },
           {
@@ -553,7 +559,7 @@
               ],
               "body": {
                 "mode": "raw",
-                "raw": "{\n  \"name\": \"Fresh Orange Juiceg\",\n  \"slug\": \"fresh-orange-juiceg\",\n  \"description\": \"100% natural orange juice with no added sugar.\",\n  \"short_description\": \"Natural orange juice\",\n  \"sku\": \"OJ-0011\",\n  \"price\": 120,\n  \"mrp\": 150,\n  \"offer_price\": 99,\n  \"offer_start\": \"2026-01-01\",\n  \"offer_end\": \"2026-01-31\",\n  \"stock\": 50,\n  \"unit\": \"1 Litre\",\n  \"category_id\": 1,\n  \"brand\": \"Stokai Fresh\",\n  \"is_active\": 1\n}\n"
+                "raw": "{\n  \"name\": \"Fresh Orange Juicggegg\",\n  \"slug\": \"fresh-orange-juigcgegg\",\n  \"description\": \"100% natural orange juice with no added sugar.\",\n  \"short_description\": \"Natural orange juice\",\n  \"sku\": \"OJ-0011\",\n  \"price\": 120,\n  \"mrp\": 150,\n  \"offer_price\": 99,\n  \"offer_start\": \"2026-01-01\",\n  \"offer_end\": \"2026-01-31\",\n  \"stock\": 50,\n  \"unit\": \"1 Litre\",\n  \"category_id\": 1,\n  \"brand\": \"Stokai Fresh\",\n  \"is_active\": 1\n}\n"
               },
               "url": {
                 "raw": "{{base_url}}/admin/products/create",
@@ -569,7 +575,7 @@
             },
             "response": [],
             "createdAt": "2026-01-06T05:15:23.000Z",
-            "updatedAt": "2026-01-06T10:38:17.000Z",
+            "updatedAt": "2026-01-09T09:24:57.000Z",
             "uid": "44267784-bdb00c00-d521-4ec3-895b-3f6e90e97621"
           },
           {
@@ -1031,10 +1037,10 @@
         "uid": "44267784-85c79aa3-7ac0-4dd4-96db-5894ae8b5c7a"
       },
       {
-        "name": "init with admin",
+        "name": "Initial",
         "item": [
           {
-            "name": "init",
+            "name": "Sync DataBase",
             "id": "3a107cb0-bbd8-4286-b19f-aa72892bdc6a",
             "protocolProfileBehavior": {
               "disableBodyPruning": true
@@ -1043,25 +1049,50 @@
               "method": "GET",
               "header": [],
               "url": {
-                "raw": "{{base_url}}/pages/about-us",
+                "raw": "{{base_url}}/setup/create-database",
                 "host": [
                   "{{base_url}}"
                 ],
                 "path": [
-                  "pages",
-                  "about-us"
+                  "setup",
+                  "create-database"
                 ]
               }
             },
             "response": [],
             "createdAt": "2026-01-06T06:38:09.000Z",
-            "updatedAt": "2026-01-06T07:42:32.000Z",
+            "updatedAt": "2026-01-09T09:58:02.000Z",
             "uid": "44267784-3a107cb0-bbd8-4286-b19f-aa72892bdc6a"
+          },
+          {
+            "name": "init",
+            "id": "36f92215-754f-46d0-b677-9ff22df39e8a",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/setup/create-admin",
+                "host": [
+                  "{{base_url}}"
+                ],
+                "path": [
+                  "setup",
+                  "create-admin"
+                ]
+              }
+            },
+            "response": [],
+            "createdAt": "2026-01-09T09:57:26.000Z",
+            "updatedAt": "2026-01-09T09:57:42.000Z",
+            "uid": "44267784-36f92215-754f-46d0-b677-9ff22df39e8a"
           }
         ],
         "id": "1e214af5-5031-41fd-8a0a-0dcd0da2f8da",
         "createdAt": "2026-01-06T06:37:50.000Z",
-        "updatedAt": "2026-01-06T06:38:09.000Z",
+        "updatedAt": "2026-01-09T09:57:48.000Z",
         "uid": "44267784-1e214af5-5031-41fd-8a0a-0dcd0da2f8da"
       },
       {
@@ -2316,7 +2347,7 @@
                   ],
                   "body": {
                     "mode": "raw",
-                    "raw": "{\n  \"id\": 1\n}"
+                    "raw": "{\n  \"id\": 2\n}"
                   },
                   "url": {
                     "raw": "{{base_url}}/admin/package-requests/mark",
@@ -2332,7 +2363,7 @@
                 },
                 "response": [],
                 "createdAt": "2026-01-09T08:30:14.000Z",
-                "updatedAt": "2026-01-09T08:30:47.000Z",
+                "updatedAt": "2026-01-09T09:24:59.000Z",
                 "uid": "44267784-e138e3c7-d709-44a2-94c5-20b0474cfbff"
               },
               {
