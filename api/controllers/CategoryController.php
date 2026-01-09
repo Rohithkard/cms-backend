@@ -47,6 +47,7 @@ class CategoryController
         $slug = slugify($_POST["slug"] ?? $name);
         $sort = (int)($_POST["sort_order"] ?? 0);
         $active = (int)($_POST["is_active"] ?? 1);
+        $description = trim($_POST["description"] ?? "");
 
         // 📷 Handle image upload (optional)
         $imageUrl = null;
@@ -63,7 +64,7 @@ class CategoryController
             VALUES (?, ?, ?, ?, ?)
         ");
 
-        $stmt->execute([$name, $slug, $imageUrl, $sort, $active]);
+        $stmt->execute([$name, $slug,$description, $imageUrl, $sort, $active]);
 
         json_response([
             "success" => true,
@@ -86,7 +87,7 @@ class CategoryController
             json_response(["success" => false, "message" => "id required"], 400);
         }
 
-        $allowed = ["name", "slug", "sort_order", "is_active"];
+        $allowed = ["name", "slug", "description", "sort_order", "is_active"];
         $set = [];
         $params = [];
 

@@ -6,7 +6,7 @@
       "description": "Plain PHP CMS API (Auth, Company, Categories, Products, Banners, Pages)",
       "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
       "createdAt": "2026-01-06T05:15:22.000Z",
-      "updatedAt": "2026-01-08T10:11:32.000Z",
+      "updatedAt": "2026-01-09T08:30:29.000Z",
       "lastUpdatedBy": "44267784",
       "uid": "44267784-741a8857-f5e9-4aae-ab1e-d7c3cce961e4"
     },
@@ -331,6 +331,12 @@
                     "type": "file",
                     "uuid": "8866a064-7e9e-4bae-b569-5045caebc0e8",
                     "src": "/D:/Application/images/pexels-andersonguerra-1197132.jpg"
+                  },
+                  {
+                    "key": "description",
+                    "value": "abjsabksja",
+                    "type": "text",
+                    "uuid": "48bf6a67-6c79-4486-8dfe-153bff572bfe"
                   }
                 ]
               },
@@ -348,7 +354,7 @@
             },
             "response": [],
             "createdAt": "2026-01-06T05:15:23.000Z",
-            "updatedAt": "2026-01-06T10:25:19.000Z",
+            "updatedAt": "2026-01-09T08:31:15.000Z",
             "uid": "44267784-1337ebe7-ec8a-46aa-9efb-d1890b33cf24"
           },
           {
@@ -1175,6 +1181,132 @@
         "name": "Why Choose Us",
         "item": [
           {
+            "name": "Admin - Why Sub Points",
+            "item": [
+              {
+                "name": "Create Sub Point",
+                "id": "6b082831-628e-4c03-b78c-89a1d35ec845",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"why_point_id\": 1,\n  \"question\": \"How fast is delivery?\",\n  \"answer\": \"Within 24–48 hours\",\n  \"sort_order\": 1,\n  \"is_active\": 1\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/why-subpoints/create",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "why-subpoints",
+                      "create"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-08T10:11:07.000Z",
+                "updatedAt": "2026-01-08T10:11:32.000Z",
+                "uid": "44267784-6b082831-628e-4c03-b78c-89a1d35ec845"
+              },
+              {
+                "name": "Update Sub Point",
+                "id": "a6f41c94-5134-4382-92f2-d69872dc0618",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"id\": 1,\n  \"question\": \"fxdvbsfdvbs?\",\n  \"answer\": \"24–48 hours guaranteed\",\n  \"sort_order\": 1,\n  \"is_active\": 1\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/why-subpoints/update",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "why-subpoints",
+                      "update"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-08T10:11:07.000Z",
+                "updatedAt": "2026-01-08T10:33:19.000Z",
+                "uid": "44267784-a6f41c94-5134-4382-92f2-d69872dc0618"
+              },
+              {
+                "name": "Delete Sub Point",
+                "id": "6cfc1585-a718-466b-879f-b82ea40e7ea2",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"id\": 3\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/why-subpoints/delete",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "why-subpoints",
+                      "delete"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-08T10:11:07.000Z",
+                "updatedAt": "2026-01-08T10:33:18.000Z",
+                "uid": "44267784-6cfc1585-a718-466b-879f-b82ea40e7ea2"
+              }
+            ],
+            "id": "1de174dc-1cf6-4e2f-bc64-24f6f49a34e6",
+            "createdAt": "2026-01-08T10:11:07.000Z",
+            "updatedAt": "2026-01-08T10:32:37.000Z",
+            "uid": "44267784-1de174dc-1cf6-4e2f-bc64-24f6f49a34e6"
+          },
+          {
             "name": "List Why Points",
             "id": "b2011b1b-a4c4-44b0-bb0b-7dc15bcc839b",
             "protocolProfileBehavior": {
@@ -1286,7 +1418,7 @@
                   },
                   {
                     "key": "title",
-                    "value": "Secure Payments",
+                    "value": "Secure Paymentsxvxfdv",
                     "type": "text"
                   }
                 ]
@@ -1306,7 +1438,7 @@
             },
             "response": [],
             "createdAt": "2026-01-08T09:23:12.000Z",
-            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "updatedAt": "2026-01-08T10:33:20.000Z",
             "uid": "44267784-e4100929-dfd8-4af7-bfd5-7f44c1ac4cb0"
           },
           {
@@ -1329,7 +1461,7 @@
               ],
               "body": {
                 "mode": "raw",
-                "raw": "{ \"id\": 1 }"
+                "raw": "{ \"id\": 3 }"
               },
               "url": {
                 "raw": "{{base_url}}/admin/home/why/delete",
@@ -1346,13 +1478,13 @@
             },
             "response": [],
             "createdAt": "2026-01-08T09:23:12.000Z",
-            "updatedAt": "2026-01-08T09:23:55.000Z",
+            "updatedAt": "2026-01-08T10:33:21.000Z",
             "uid": "44267784-fe69ba2a-ab85-4cae-97d2-be8e8e3193fd"
           }
         ],
         "id": "e59cdb89-41f1-4e72-b03e-891c50531660",
         "createdAt": "2026-01-08T09:23:12.000Z",
-        "updatedAt": "2026-01-08T09:23:55.000Z",
+        "updatedAt": "2026-01-08T10:17:51.000Z",
         "uid": "44267784-e59cdb89-41f1-4e72-b03e-891c50531660"
       },
       {
@@ -2087,166 +2219,172 @@
         "uid": "44267784-cb8f1ac3-3066-42dd-8ee8-98a476ae9177"
       },
       {
-        "name": "Admin - Why Sub Points",
+        "name": "package",
         "item": [
           {
-            "name": "List Sub Points",
-            "id": "feb1a972-1641-4eb3-9f0e-948ebfb66678",
-            "protocolProfileBehavior": {
-              "disableBodyPruning": true
-            },
-            "request": {
-              "method": "GET",
-              "header": [
-                {
-                  "key": "Authorization",
-                  "value": "Bearer {{token}}"
-                }
-              ],
-              "url": {
-                "raw": "{{base_url}}/admin/why-subpoints?why_point_id=1",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "admin",
-                  "why-subpoints"
-                ],
-                "query": [
-                  {
-                    "key": "why_point_id",
-                    "value": "1"
+            "name": "Public",
+            "item": [
+              {
+                "name": "Create Package Request",
+                "id": "977234c0-a255-420d-a70f-cde3b2e3a4b5",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"first_name\": \"Arjun\",\n  \"last_name\": \"Kumar\",\n  \"email\": \"arjun@gmail.com\",\n  \"phone\": \"+91 9876543210\",\n  \"category\": \"Electronics\",\n  \"products\": [\n    { \"product_name\": \"Bluetooth Speaker\", \"quantity\": 10 },\n    { \"product_name\": \"Wireless Headphones\", \"quantity\": 5 },\n    { \"product_name\": \"Smart Watch\", \"quantity\": 3 }\n  ]\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/package-request",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "package-request"
+                    ]
                   }
-                ]
+                },
+                "response": [],
+                "createdAt": "2026-01-09T08:30:14.000Z",
+                "updatedAt": "2026-01-09T08:30:47.000Z",
+                "uid": "44267784-977234c0-a255-420d-a70f-cde3b2e3a4b5"
               }
-            },
-            "response": [],
-            "createdAt": "2026-01-08T10:11:07.000Z",
-            "updatedAt": "2026-01-08T10:11:32.000Z",
-            "uid": "44267784-feb1a972-1641-4eb3-9f0e-948ebfb66678"
+            ],
+            "id": "1126dd18-82a3-4ea0-ba3b-9ebbc2b95924",
+            "createdAt": "2026-01-09T08:30:14.000Z",
+            "updatedAt": "2026-01-09T08:30:47.000Z",
+            "uid": "44267784-1126dd18-82a3-4ea0-ba3b-9ebbc2b95924"
           },
           {
-            "name": "Create Sub Point",
-            "id": "6b082831-628e-4c03-b78c-89a1d35ec845",
-            "protocolProfileBehavior": {
-              "disableBodyPruning": true
-            },
-            "request": {
-              "method": "POST",
-              "header": [
-                {
-                  "key": "Authorization",
-                  "value": "Bearer {{token}}"
+            "name": "Admin",
+            "item": [
+              {
+                "name": "List Package Requests",
+                "id": "a69e9fc3-96ed-4e09-9b55-b97d91341fa8",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
                 },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": {
-                "mode": "raw",
-                "raw": "{\n  \"why_point_id\": 1,\n  \"question\": \"How fast is delivery?\",\n  \"answer\": \"Within 24–48 hours\",\n  \"sort_order\": 1,\n  \"is_active\": 1\n}"
-              },
-              "url": {
-                "raw": "{{base_url}}/admin/why-subpoints/create",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "admin",
-                  "why-subpoints",
-                  "create"
-                ]
-              }
-            },
-            "response": [],
-            "createdAt": "2026-01-08T10:11:07.000Z",
-            "updatedAt": "2026-01-08T10:11:32.000Z",
-            "uid": "44267784-6b082831-628e-4c03-b78c-89a1d35ec845"
-          },
-          {
-            "name": "Update Sub Point",
-            "id": "a6f41c94-5134-4382-92f2-d69872dc0618",
-            "protocolProfileBehavior": {
-              "disableBodyPruning": true
-            },
-            "request": {
-              "method": "POST",
-              "header": [
-                {
-                  "key": "Authorization",
-                  "value": "Bearer {{token}}"
+                "request": {
+                  "method": "GET",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    }
+                  ],
+                  "url": {
+                    "raw": "{{base_url}}/admin/package-requests",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "package-requests"
+                    ]
+                  }
                 },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": {
-                "mode": "raw",
-                "raw": "{\n  \"id\": 1,\n  \"question\": \"How fast is shipping?\",\n  \"answer\": \"24–48 hours guaranteed\",\n  \"sort_order\": 1,\n  \"is_active\": 1\n}"
+                "response": [],
+                "createdAt": "2026-01-09T08:30:14.000Z",
+                "updatedAt": "2026-01-09T08:30:47.000Z",
+                "uid": "44267784-a69e9fc3-96ed-4e09-9b55-b97d91341fa8"
               },
-              "url": {
-                "raw": "{{base_url}}/admin/why-subpoints/update",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "admin",
-                  "why-subpoints",
-                  "update"
-                ]
-              }
-            },
-            "response": [],
-            "createdAt": "2026-01-08T10:11:07.000Z",
-            "updatedAt": "2026-01-08T10:11:32.000Z",
-            "uid": "44267784-a6f41c94-5134-4382-92f2-d69872dc0618"
-          },
-          {
-            "name": "Delete Sub Point",
-            "id": "6cfc1585-a718-466b-879f-b82ea40e7ea2",
-            "protocolProfileBehavior": {
-              "disableBodyPruning": true
-            },
-            "request": {
-              "method": "POST",
-              "header": [
-                {
-                  "key": "Authorization",
-                  "value": "Bearer {{token}}"
+              {
+                "name": "Mark Package Request as Contacted",
+                "id": "e138e3c7-d709-44a2-94c5-20b0474cfbff",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
                 },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": {
-                "mode": "raw",
-                "raw": "{\n  \"id\": 1\n}"
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"id\": 1\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/package-requests/mark",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "package-requests",
+                      "mark"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-09T08:30:14.000Z",
+                "updatedAt": "2026-01-09T08:30:47.000Z",
+                "uid": "44267784-e138e3c7-d709-44a2-94c5-20b0474cfbff"
               },
-              "url": {
-                "raw": "{{base_url}}/admin/why-subpoints/delete",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "admin",
-                  "why-subpoints",
-                  "delete"
-                ]
+              {
+                "name": "Delete Package Request",
+                "id": "83b846ad-eda5-4a57-977c-6aafb7f3fb6d",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"id\": 1\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/package-requests/delete",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "package-requests",
+                      "delete"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-09T08:30:14.000Z",
+                "updatedAt": "2026-01-09T08:30:47.000Z",
+                "uid": "44267784-83b846ad-eda5-4a57-977c-6aafb7f3fb6d"
               }
-            },
-            "response": [],
-            "createdAt": "2026-01-08T10:11:07.000Z",
-            "updatedAt": "2026-01-08T10:11:32.000Z",
-            "uid": "44267784-6cfc1585-a718-466b-879f-b82ea40e7ea2"
+            ],
+            "id": "b5c8517c-e84e-45f6-a3a2-6b6747a20618",
+            "createdAt": "2026-01-09T08:30:14.000Z",
+            "updatedAt": "2026-01-09T08:30:47.000Z",
+            "uid": "44267784-b5c8517c-e84e-45f6-a3a2-6b6747a20618"
           }
         ],
-        "id": "1de174dc-1cf6-4e2f-bc64-24f6f49a34e6",
-        "createdAt": "2026-01-08T10:11:07.000Z",
-        "updatedAt": "2026-01-08T10:11:32.000Z",
-        "uid": "44267784-1de174dc-1cf6-4e2f-bc64-24f6f49a34e6"
+        "id": "eb98c7a4-137e-4547-8aaf-7c94d24abf0e",
+        "createdAt": "2026-01-09T08:30:29.000Z",
+        "updatedAt": "2026-01-09T08:30:47.000Z",
+        "uid": "44267784-eb98c7a4-137e-4547-8aaf-7c94d24abf0e"
       }
     ],
     "event": [

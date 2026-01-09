@@ -243,3 +243,28 @@ CREATE TABLE contact_requests (
   contacted_at DATETIME DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE package_requests (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  first_name VARCHAR(120) NOT NULL,
+  last_name VARCHAR(120) NOT NULL,
+  email VARCHAR(190) NOT NULL,
+  phone VARCHAR(50) NOT NULL,
+  category VARCHAR(190) DEFAULT NULL,
+  is_contacted TINYINT(1) DEFAULT 0,
+  contacted_at DATETIME DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE package_request_items (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  package_request_id BIGINT UNSIGNED NOT NULL,
+  product_name VARCHAR(190) NOT NULL,
+  quantity INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  CONSTRAINT fk_package_request_items
+    FOREIGN KEY (package_request_id)
+    REFERENCES package_requests(id)
+    ON DELETE CASCADE
+);

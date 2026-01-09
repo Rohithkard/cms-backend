@@ -34,6 +34,7 @@ route("GET", "/theme", fn() => ThemeController::getPublic());
 route("POST", "/contact", fn() => ContactController::create());
 route("GET", "/home", fn()=>HomeController::get());
 
+route("POST", "/package-request", fn()=>PackageRequestController::create());
 
 
 /**
@@ -100,6 +101,10 @@ route("POST", "/admin/why-subpoints/create", fn()=>HomeController::createWhySub(
 route("POST", "/admin/why-subpoints/update", fn()=>HomeController::updateWhySub());
 route("POST", "/admin/why-subpoints/delete", fn()=>HomeController::deleteWhySub());
 
+
+route("GET",  "/admin/package-requests", fn()=>PackageRequestController::list());
+route("POST", "/admin/package-requests/mark", fn()=>PackageRequestController::markContacted());
+route("POST", "/admin/package-requests/delete", fn()=>PackageRequestController::delete());
 
 
 not_found();
