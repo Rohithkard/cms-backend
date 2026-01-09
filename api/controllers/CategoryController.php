@@ -14,7 +14,7 @@ class CategoryController
     public static function listPublic(): void
     {
         $rows = db()->query("
-            SELECT id, name, slug, image_url
+            SELECT id, name, slug, image_url,description
             FROM categories
             WHERE is_active = 1
             ORDER BY sort_order ASC, name ASC
@@ -45,11 +45,11 @@ class CategoryController
         }
 
         $slug = slugify($_POST["slug"] ?? $name);
-        $sort = (int)($_POST["sort_order"] ?? 0);
-        $active = (int)($_POST["is_active"] ?? 1);
+        $sort = (int) ($_POST["sort_order"] ?? 0);
+        $active = (int) ($_POST["is_active"] ?? 1);
         $description = trim($_POST["description"] ?? "");
 
-        // 📷 Handle image upload (optional)
+        // 📷 Image upload
         $imageUrl = null;
         if (!empty($_FILES["image"])) {
             $res = handle_image_upload("image");
@@ -60,11 +60,19 @@ class CategoryController
         }
 
         $stmt = db()->prepare("
-            INSERT INTO categories (name, slug, image_url, sort_order, is_active)
-            VALUES (?, ?, ?, ?, ?)
-        ");
+        INSERT INTO categories
+        (name, slug, description, image_url, sort_order, is_active)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ");
 
-        $stmt->execute([$name, $slug,$description, $imageUrl, $sort, $active]);
+        $stmt->execute([
+            $name,
+            $slug,
+            $description,
+            $imageUrl,
+            $sort,
+            $active
+        ]);
 
         json_response([
             "success" => true,
@@ -74,55 +82,80 @@ class CategoryController
         ]);
     }
 
+
     /* =========================
        ADMIN – UPDATE CATEGORY
        (multipart/form-data)
     ========================= */
     public static function update(): void
-    {
-        require_admin();
+{
+    require_admin();
 
-        $id = (int)($_POST["id"] ?? 0);
-        if (!$id) {
-            json_response(["success" => false, "message" => "id required"], 400);
-        }
-
-        $allowed = ["name", "slug", "description", "sort_order", "is_active"];
-        $set = [];
-        $params = [];
-
-        foreach ($allowed as $f) {
-            if (isset($_POST[$f])) {
-                $set[] = "$f = ?";
-                $params[] = $_POST[$f];
-            }
-        }
-
-        // 📷 If new image uploaded → update image_url
-        if (!empty($_FILES["image"])) {
-            $res = handle_image_upload("image");
-            if (!$res["ok"]) {
-                json_response(["success" => false, "message" => $res["message"]], 400);
-            }
-            $set[] = "image_url = ?";
-            $params[] = $res["url"];
-        }
-
-        if (!$set) {
-            json_response(["success" => false, "message" => "No fields provided"], 400);
-        }
-
-        $params[] = $id;
-
-        db()->prepare(
-            "UPDATE categories SET " . implode(",", $set) . " WHERE id = ?"
-        )->execute($params);
-
+    $id = (int) ($_POST["id"] ?? 0);
+    if ($id <= 0) {
         json_response([
-            "success" => true,
-            "message" => "Category updated"
-        ]);
+            "success" => false,
+            "message" => "Valid id is required"
+        ], 400);
     }
+
+    // Allowed updatable fields
+    $allowed = ["name", "slug", "description", "sort_order", "is_active"];
+
+    $set = [];
+    $params = [];
+
+    foreach ($allowed as $field) {
+        if (array_key_exists($field, $_POST)) {
+            $set[] = "{$field} = ?";
+            $params[] = $_POST[$field];
+        }
+    }
+
+    /* ================= IMAGE UPLOAD ================= */
+    if (!empty($_FILES["image"]) && $_FILES["image"]["error"] === UPLOAD_ERR_OK) {
+
+        $res = handle_image_upload("image");
+
+        if (!$res["ok"]) {
+            json_response([
+                "success" => false,
+                "message" => $res["message"]
+            ], 400);
+        }
+
+        $set[] = "image_url = ?";
+        $params[] = $res["url"];
+    }
+
+    if (empty($set)) {
+        json_response([
+            "success" => false,
+            "message" => "No fields provided to update"
+        ], 400);
+    }
+
+    $params[] = $id;
+
+    $stmt = db()->prepare(
+        "UPDATE categories SET " . implode(", ", $set) . " WHERE id = ?"
+    );
+
+    $stmt->execute($params);
+
+    if ($stmt->rowCount() === 0) {
+        json_response([
+            "success" => false,
+            "message" => "No changes made or category not found"
+        ], 404);
+    }
+
+    json_response([
+        "success" => true,
+        "message" => "Category updated successfully"
+    ]);
+}
+
 
     /* =========================
        ADMIN – DELETE CATEGORY
@@ -131,7 +164,7 @@ class CategoryController
     {
         require_admin();
         $b = get_json_body();
-        $id = (int)($b["id"] ?? 0);
+        $id = (int) ($b["id"] ?? 0);
 
         if (!$id) {
             json_response(["success" => false, "message" => "id required"], 400);
