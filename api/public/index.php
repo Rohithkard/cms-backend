@@ -12,6 +12,7 @@ require_once __DIR__ . "/../controllers/CompanyController.php";
 require_once __DIR__ . "/../controllers/ThemeController.php";
 require_once __DIR__ . "/../controllers/HomeController.php";
 require_once __DIR__ . "/../controllers/ContactController.php";
+require_once __DIR__ . "/../controllers/PackageRequestController.php";
 
 
 
