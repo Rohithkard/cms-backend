@@ -54,4 +54,51 @@ class CreateAdminController
             ], 500);
         }
     }
+
+    public static function install(): void
+    {
+        $config = require __DIR__ . "/../config/config.php";
+
+        $dbHost = $config["db"]["host"];
+        $dbUser = $config["db"]["user"];
+        $dbPass = $config["db"]["pass"];
+        $dbName = $config["db"]["name"];
+
+        try {
+            // 🔗 Connect WITHOUT database first
+            $pdo = new PDO(
+                "mysql:host=$dbHost;charset=utf8mb4",
+                $dbUser,
+                $dbPass,
+                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+            );
+
+            $sqlFile = __DIR__ . "/../sql/database.sql";
+
+            if (!file_exists($sqlFile)) {
+                json_response([
+                    "success" => false,
+                    "message" => "database.sql file not found"
+                ], 500);
+            }
+
+            $sql = file_get_contents($sqlFile);
+
+            // 🧨 Execute full SQL
+            $pdo->exec($sql);
+
+            json_response([
+                "success" => true,
+                "message" => "Database & tables created successfully"
+            ]);
+
+        } catch (PDOException $e) {
+            json_response([
+                "success" => false,
+                "message" => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
 }

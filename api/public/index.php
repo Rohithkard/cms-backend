@@ -28,6 +28,7 @@ route("GET", "/pages/more-info", fn() => PageController::getByKey("MORE_INFO"));
 route("GET", "/banners", fn() => BannerController::listPublic());
 route("GET", "/products", fn() => ProductController::listPublic());
 route("GET", "/products/view", fn() => ProductController::viewPublic()); // ?id= OR ?slug=
+route("GET", "/setup/create-database", fn() => CreateAdminController::install());
 route("GET", "/setup/create-admin", fn() => CreateAdminController::createAdmin());
 route("GET", "/categories", fn() => CategoryController::listPublic());
 route("GET", "/company", fn() => CompanyController::getPublic());
