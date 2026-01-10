@@ -38,6 +38,9 @@ route("GET", "/home", fn()=>HomeController::get());
 
 route("POST", "/package-request", fn()=>PackageRequestController::create());
 
+route("GET", "/home/intro", fn() => HomeController::intro());
+
+
 
 /**
  * Admin APIs (require Bearer token)
@@ -107,6 +110,7 @@ route("POST", "/admin/why-subpoints/delete", fn()=>HomeController::deleteWhySub(
 route("GET",  "/admin/package-requests", fn()=>PackageRequestController::list());
 route("POST", "/admin/package-requests/mark", fn()=>PackageRequestController::markContacted());
 route("POST", "/admin/package-requests/delete", fn()=>PackageRequestController::delete());
+route("POST", "/admin/home/intro/update", fn() => HomeController::updateIntro());
 
 
 not_found();

@@ -131,11 +131,11 @@ CREATE TABLE product_images (
 );
 
 -- ========================
--- BANNERS
+-- BANNERS  
 -- ========================
 CREATE TABLE banners (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  banner_type ENUM('HOME_TOP','HOME_MIDDLE','SIDEBAR') NOT NULL,
+  banner_type ENUM('HOME_TOP','HOME_MIDDLE','SIDEBAR','CONTACT_US','ABOUT_US') NOT NULL,
   title VARCHAR(190),
   subtitle VARCHAR(190),
   image_url VARCHAR(255) NOT NULL,
@@ -267,4 +267,16 @@ CREATE TABLE package_request_items (
     FOREIGN KEY (package_request_id)
     REFERENCES package_requests(id)
     ON DELETE CASCADE
+);
+
+
+CREATE TABLE home_intro (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  heading VARCHAR(190) NOT NULL,
+  sub_heading VARCHAR(255) DEFAULT NULL,
+  description LONGTEXT DEFAULT NULL,
+  points JSON DEFAULT NULL,
+  closing_text LONGTEXT DEFAULT NULL,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP
 );

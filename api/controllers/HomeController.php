@@ -633,4 +633,73 @@ class HomeController
         ]);
     }
 
+     /* =========================
+       PUBLIC – INTRO
+    ========================= */
+    public static function intro(): void
+    {
+        $row = db()->query("
+            SELECT heading, sub_heading, description, points, closing_text
+            FROM home_intro
+            LIMIT 1
+        ")->fetch();
+
+        if ($row && $row["points"]) {
+            $row["points"] = json_decode($row["points"], true);
+        }
+
+        json_response([
+            "success" => true,
+            "data" => $row ?: []
+        ]);
+    }
+
+    /* =========================
+       ADMIN – UPDATE INTRO
+    ========================= */
+    public static function updateIntro(): void
+    {
+        require_admin();
+        $b = get_json_body();
+
+        $allowed = [
+            "heading",
+            "sub_heading",
+            "description",
+            "points",
+            "closing_text"
+        ];
+
+        $set = [];
+        $params = [];
+
+        foreach ($allowed as $f) {
+            if (array_key_exists($f, $b)) {
+                if ($f === "points") {
+                    $set[] = "points = ?";
+                    $params[] = json_encode($b["points"]);
+                } else {
+                    $set[] = "$f = ?";
+                    $params[] = $b[$f];
+                }
+            }
+        }
+
+        if (!$set) {
+            json_response([
+                "success" => false,
+                "message" => "No fields provided"
+            ], 400);
+        }
+
+        db()->prepare(
+            "UPDATE home_intro SET " . implode(",", $set) . " LIMIT 1"
+        )->execute($params);
+
+        json_response([
+            "success" => true,
+            "message" => "Home intro updated"
+        ]);
+    }
+
 }

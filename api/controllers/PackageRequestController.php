@@ -14,7 +14,7 @@ class PackageRequestController
     {
         $b = get_json_body();
 
-        $required = ["first_name","last_name","email","phone","products"];
+        $required = ["first_name","email","phone","products"];
         foreach ($required as $f) {
             if (empty($b[$f])) {
                 json_response(["success"=>false,"message"=>"$f required"],400);
