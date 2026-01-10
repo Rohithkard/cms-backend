@@ -135,7 +135,7 @@ CREATE TABLE product_images (
 -- ========================
 CREATE TABLE banners (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  banner_type ENUM('HOME_TOP','HOME_MIDDLE','SIDEBAR','CONTACT_US','ABOUT_US') NOT NULL,
+  banner_type ENUM('HOME_TOP','HOME_MIDDLE','SIDEBAR','CONTACT_US','ABOUT_US','NORMAL_IMAGE') NOT NULL,
   title VARCHAR(190),
   subtitle VARCHAR(190),
   image_url VARCHAR(255) NOT NULL,
@@ -279,4 +279,36 @@ CREATE TABLE home_intro (
   closing_text LONGTEXT DEFAULT NULL,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO home_intro (heading, sub_heading)
+VALUES (
+  'Welcome to Green Agile',
+  'Your Trusted Partner for High-Quality Paper and Plastic Packaging Solutions'
+);
+
+CREATE TABLE home_sections (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  section_key VARCHAR(80) NOT NULL UNIQUE,
+  heading VARCHAR(190) NOT NULL,
+  sub_heading VARCHAR(255) DEFAULT NULL,
+  content LONGTEXT DEFAULT NULL,
+  is_active TINYINT(1) DEFAULT 1,
+  sort_order INT DEFAULT 0,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE home_section_images (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  section_id BIGINT UNSIGNED NOT NULL,
+  image_url VARCHAR(255) NOT NULL,
+  sort_order INT DEFAULT 0,
+  is_active TINYINT(1) DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  CONSTRAINT fk_home_section_images
+    FOREIGN KEY (section_id)
+    REFERENCES home_sections(id)
+    ON DELETE CASCADE
 );

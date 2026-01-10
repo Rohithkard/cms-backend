@@ -13,6 +13,7 @@ require_once __DIR__ . "/../controllers/ThemeController.php";
 require_once __DIR__ . "/../controllers/HomeController.php";
 require_once __DIR__ . "/../controllers/ContactController.php";
 require_once __DIR__ . "/../controllers/PackageRequestController.php";
+require_once __DIR__ . "/../controllers/AboutUsHomeController.php";
 
 
 
@@ -111,6 +112,20 @@ route("GET",  "/admin/package-requests", fn()=>PackageRequestController::list())
 route("POST", "/admin/package-requests/mark", fn()=>PackageRequestController::markContacted());
 route("POST", "/admin/package-requests/delete", fn()=>PackageRequestController::delete());
 route("POST", "/admin/home/intro/update", fn() => HomeController::updateIntro());
+
+
+// Public
+route("GET", "/home/sections", fn()=>AboutUshHomeController::listPublic());
+
+// Admin
+route("GET",  "/admin/home/sections", fn()=>AboutUshHomeController::listAdmin());
+route("POST", "/admin/home/sections/create", fn()=>AboutUshHomeController::create());
+route("POST", "/admin/home/sections/update", fn()=>AboutUshHomeController::update());
+route("POST", "/admin/home/sections/delete", fn()=>AboutUshHomeController::delete());
+
+// Images
+route("POST", "/admin/home/sections/images/upload", fn()=>AboutUshHomeController::uploadImage());
+route("POST", "/admin/home/sections/images/delete", fn()=>AboutUshHomeController::deleteImage());
 
 
 not_found();
