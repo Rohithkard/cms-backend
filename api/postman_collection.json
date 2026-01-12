@@ -6,7 +6,7 @@
       "description": "Plain PHP CMS API (Auth, Company, Categories, Products, Banners, Pages)",
       "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
       "createdAt": "2026-01-06T05:15:22.000Z",
-      "updatedAt": "2026-01-09T08:30:29.000Z",
+      "updatedAt": "2026-01-10T11:20:47.000Z",
       "lastUpdatedBy": "44267784",
       "uid": "44267784-741a8857-f5e9-4aae-ab1e-d7c3cce961e4"
     },
@@ -310,31 +310,35 @@
                 "formdata": [
                   {
                     "key": "name",
-                    "value": "Beveragessg",
+                    "value": "cat 05",
                     "type": "text",
                     "uuid": "2c0927f9-2877-4777-bcc6-c1d8203a045b"
                   },
                   {
                     "key": "slug",
-                    "value": "beveragessg",
+                    "value": "cat 05",
                     "type": "text",
                     "uuid": "8ad877d5-fbee-49b2-b08b-6335d362caaa"
                   },
                   {
                     "key": "sort_order",
-                    "value": "1",
+                    "value": "4",
                     "type": "text",
-                    "uuid": "33a1c4cc-773b-4790-82be-bbe85d04adab"
+                    "uuid": "33a1c4cc-773b-4790-82be-bbe85d04adab",
+                    "disabled": true
                   },
                   {
                     "key": "image",
                     "type": "file",
                     "uuid": "8866a064-7e9e-4bae-b569-5045caebc0e8",
-                    "src": "/D:/Application/images/pexels-andersonguerra-1197132.jpg"
+                    "src": [
+                      "/D:/Application/images/pexels-andersonguerra-1197132.jpg",
+                      "/D:/Application/adocity/img/cat_dummy.png"
+                    ]
                   },
                   {
                     "key": "description",
-                    "value": "abjsabksja",
+                    "value": "cat 06 ",
                     "type": "text",
                     "uuid": "48bf6a67-6c79-4486-8dfe-153bff572bfe"
                   }
@@ -354,7 +358,7 @@
             },
             "response": [],
             "createdAt": "2026-01-06T05:15:23.000Z",
-            "updatedAt": "2026-01-09T08:31:15.000Z",
+            "updatedAt": "2026-01-09T10:52:32.000Z",
             "uid": "44267784-1337ebe7-ec8a-46aa-9efb-d1890b33cf24"
           },
           {
@@ -2271,7 +2275,7 @@
                   ],
                   "body": {
                     "mode": "raw",
-                    "raw": "{\n  \"first_name\": \"Arjun\",\n  \"last_name\": \"Kumar\",\n  \"email\": \"arjun@gmail.com\",\n  \"phone\": \"+91 9876543210\",\n  \"category\": \"Electronics\",\n  \"products\": [\n    { \"product_name\": \"Bluetooth Speaker\", \"quantity\": 10 },\n    { \"product_name\": \"Wireless Headphones\", \"quantity\": 5 },\n    { \"product_name\": \"Smart Watch\", \"quantity\": 3 }\n  ]\n}"
+                    "raw": "{\n  \"first_name\": \"Arjun\",\n   \"last_name\": \"h\",\n  \"email\": \"arjun@gmail.com\",\n  \"phone\": \"+91 9876543210\",\n  \"category\": \"Electronics\",\n  \"request_type\":\"CATEGORY\",\n  \"products\": [\n    { \"product_name\": \"Bluetooth Speaker\", \"quantity\": 10 },\n    { \"product_name\": \"Wireless Headphones\", \"quantity\": 5 },\n    { \"product_name\": \"Smart Watch\", \"quantity\": 3 }\n  ]\n}"
                   },
                   "url": {
                     "raw": "{{base_url}}/package-request",
@@ -2285,7 +2289,7 @@
                 },
                 "response": [],
                 "createdAt": "2026-01-09T08:30:14.000Z",
-                "updatedAt": "2026-01-09T08:30:47.000Z",
+                "updatedAt": "2026-01-12T10:28:53.000Z",
                 "uid": "44267784-977234c0-a255-420d-a70f-cde3b2e3a4b5"
               }
             ],
@@ -2312,19 +2316,25 @@
                     }
                   ],
                   "url": {
-                    "raw": "{{base_url}}/admin/package-requests",
+                    "raw": "{{base_url}}/admin/package-requests?request_type=PRODUCT",
                     "host": [
                       "{{base_url}}"
                     ],
                     "path": [
                       "admin",
                       "package-requests"
+                    ],
+                    "query": [
+                      {
+                        "key": "request_type",
+                        "value": "PRODUCT"
+                      }
                     ]
                   }
                 },
                 "response": [],
                 "createdAt": "2026-01-09T08:30:14.000Z",
-                "updatedAt": "2026-01-09T08:30:47.000Z",
+                "updatedAt": "2026-01-12T06:46:07.000Z",
                 "uid": "44267784-a69e9fc3-96ed-4e09-9b55-b97d91341fa8"
               },
               {
@@ -2416,6 +2426,587 @@
         "createdAt": "2026-01-09T08:30:29.000Z",
         "updatedAt": "2026-01-09T08:30:47.000Z",
         "uid": "44267784-eb98c7a4-137e-4547-8aaf-7c94d24abf0e"
+      },
+      {
+        "name": "home intro",
+        "item": [
+          {
+            "name": "Public",
+            "item": [
+              {
+                "name": "Get Home Intro",
+                "id": "cc560305-3cc5-4d5e-985f-350ef8f71483",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                    "raw": "{{base_url}}/home/intro",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "home",
+                      "intro"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-10T09:11:30.000Z",
+                "updatedAt": "2026-01-10T09:12:04.000Z",
+                "uid": "44267784-cc560305-3cc5-4d5e-985f-350ef8f71483"
+              }
+            ],
+            "id": "38512208-6bdb-4933-a182-5d5f804ca69e",
+            "createdAt": "2026-01-10T09:11:30.000Z",
+            "updatedAt": "2026-01-10T09:12:04.000Z",
+            "uid": "44267784-38512208-6bdb-4933-a182-5d5f804ca69e"
+          },
+          {
+            "name": "Admin",
+            "item": [
+              {
+                "name": "Update Home Intro",
+                "id": "e53e47e8-e604-4e7a-934b-8b84df2e9a2b",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "type": "text"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"heading\": \"Welcome to Green Agile\",\n  \"sub_heading\": \"Your Trusted Partner for High-Quality Paper and Plastic Packaging Solutions\",\n  \"description\": \"At Green Agile, we specialize in crafting premium packaging products that serve a wide range of industries combining functionality, sustainability, and branding in every item we produce.\",\n  \"points\": [\n    \"Paper cups & lids\",\n    \"PET cups\",\n    \"Food boxes\",\n    \"Paper bags\",\n    \"Cutlery\",\n    \"Wrapping paper\",\n    \"Ice cream cups\",\n    \"Tissues & wipes\",\n    \"Coffee Pouch\"\n  ],\n  \"closing_text\": \"Partner with Green Agile where craftsmanship meets sustainability, and your packaging needs are fulfilled under one trusted name.\"\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/home/intro/update",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "home",
+                      "intro",
+                      "update"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-10T09:11:30.000Z",
+                "updatedAt": "2026-01-10T09:12:04.000Z",
+                "uid": "44267784-e53e47e8-e604-4e7a-934b-8b84df2e9a2b"
+              }
+            ],
+            "id": "186cbfaf-a3f7-4938-8794-da6c50bdee95",
+            "createdAt": "2026-01-10T09:11:30.000Z",
+            "updatedAt": "2026-01-10T09:12:04.000Z",
+            "uid": "44267784-186cbfaf-a3f7-4938-8794-da6c50bdee95"
+          },
+          {
+            "name": "Public",
+            "item": [
+              {
+                "name": "Get Home Intro (Public)",
+                "id": "2ed7bdd5-474e-4f7c-9a41-c488c4961727",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                    "raw": "{{base_url}}/home/intro",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "home",
+                      "intro"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-12T04:21:59.000Z",
+                "updatedAt": "2026-01-12T04:23:18.000Z",
+                "uid": "44267784-2ed7bdd5-474e-4f7c-9a41-c488c4961727"
+              }
+            ],
+            "id": "45a36868-fa00-4004-82b1-58084c495748",
+            "createdAt": "2026-01-12T04:21:59.000Z",
+            "updatedAt": "2026-01-12T04:23:18.000Z",
+            "uid": "44267784-45a36868-fa00-4004-82b1-58084c495748"
+          },
+          {
+            "name": "Admin - Intro Content",
+            "item": [
+              {
+                "name": "Update Home Intro Content",
+                "id": "570006ed-1610-45c9-bd73-9e1c84e31142",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"heading\": \"Welcome to Green Agile\",\n  \"sub_heading\": \"Your Trusted Partner for Packaging\",\n  \"description\": \"We specialize in premium paper and plastic packaging solutions.\",\n  \"points\": [\n    \"Paper cups & lids\",\n    \"PET cups\",\n    \"Food boxes\",\n    \"Eco-friendly packaging\"\n  ],\n  \"closing_text\": \"Partner with Green Agile for sustainable packaging solutions.\"\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/home/intro/update",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "home",
+                      "intro",
+                      "update"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-12T04:21:59.000Z",
+                "updatedAt": "2026-01-12T04:23:18.000Z",
+                "uid": "44267784-570006ed-1610-45c9-bd73-9e1c84e31142"
+              }
+            ],
+            "id": "283313a3-9e32-4354-93c4-6847ac771cb6",
+            "createdAt": "2026-01-12T04:21:59.000Z",
+            "updatedAt": "2026-01-12T04:23:18.000Z",
+            "uid": "44267784-283313a3-9e32-4354-93c4-6847ac771cb6"
+          },
+          {
+            "name": "Admin - Intro Images (Slider)",
+            "item": [
+              {
+                "name": "Upload Intro Image",
+                "id": "8b8cef0c-6700-4988-be27-43a275ae9b7b",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    }
+                  ],
+                  "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                      {
+                        "key": "image",
+                        "type": "file",
+                        "value": null
+                      },
+                      {
+                        "key": "sort_order",
+                        "value": "1",
+                        "type": "text"
+                      }
+                    ]
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/home/intro/images/upload",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "home",
+                      "intro",
+                      "images",
+                      "upload"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-12T04:21:59.000Z",
+                "updatedAt": "2026-01-12T04:23:18.000Z",
+                "uid": "44267784-8b8cef0c-6700-4988-be27-43a275ae9b7b"
+              },
+              {
+                "name": "Delete Intro Image",
+                "id": "0cd1e41f-9057-4e93-a5b9-0e366e3dc37e",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"id\": 1\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/home/intro/images/delete",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "home",
+                      "intro",
+                      "images",
+                      "delete"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-12T04:21:59.000Z",
+                "updatedAt": "2026-01-12T04:23:18.000Z",
+                "uid": "44267784-0cd1e41f-9057-4e93-a5b9-0e366e3dc37e"
+              }
+            ],
+            "id": "1b6efedd-20fc-4d51-8063-3f6d6f7262d3",
+            "createdAt": "2026-01-12T04:21:59.000Z",
+            "updatedAt": "2026-01-12T04:23:18.000Z",
+            "uid": "44267784-1b6efedd-20fc-4d51-8063-3f6d6f7262d3"
+          }
+        ],
+        "id": "bf54fb41-1031-4119-8fce-169d3879ea1b",
+        "createdAt": "2026-01-10T09:11:50.000Z",
+        "updatedAt": "2026-01-12T04:23:18.000Z",
+        "uid": "44267784-bf54fb41-1031-4119-8fce-169d3879ea1b"
+      },
+      {
+        "name": "home Section -new",
+        "item": [
+          {
+            "name": "Public",
+            "item": [
+              {
+                "name": "Get Home Sections (Public)",
+                "id": "e2d54a91-8cdc-4893-b728-753f7d28f201",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                    "raw": "{{base_url}}/home/sections",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "home",
+                      "sections"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-10T11:19:38.000Z",
+                "updatedAt": "2026-01-10T11:20:41.000Z",
+                "uid": "44267784-e2d54a91-8cdc-4893-b728-753f7d28f201"
+              }
+            ],
+            "id": "ad1f0537-19f7-4c0d-b95c-d34982658954",
+            "createdAt": "2026-01-10T11:19:38.000Z",
+            "updatedAt": "2026-01-10T11:20:47.000Z",
+            "uid": "44267784-ad1f0537-19f7-4c0d-b95c-d34982658954"
+          },
+          {
+            "name": "Admin - Sections",
+            "item": [
+              {
+                "name": "List Sections (Admin)",
+                "id": "a2e694fa-74d0-45e5-a282-f74adbeb4f26",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "GET",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    }
+                  ],
+                  "url": {
+                    "raw": "{{base_url}}/admin/home/sections",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "home",
+                      "sections"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-10T11:19:38.000Z",
+                "updatedAt": "2026-01-10T11:20:41.000Z",
+                "uid": "44267784-a2e694fa-74d0-45e5-a282-f74adbeb4f26"
+              },
+              {
+                "name": "Create Section",
+                "id": "e8dfba34-ddcb-40c2-9bf2-82f532ef42a1",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"section_key\": \"WELCOME_SECTIONV\",\n  \"heading\": \"Welcome to Green Agile\",\n  \"sub_heading\": \"Your Trusted Partner for Packaging\",\n  \"content\": \"Premium paper & plastic packaging solutions.\",\n  \"sort_order\": 1,\n  \"is_active\": 1\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/home/sections/create",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "home",
+                      "sections",
+                      "create"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-10T11:19:38.000Z",
+                "updatedAt": "2026-01-10T12:44:01.000Z",
+                "uid": "44267784-e8dfba34-ddcb-40c2-9bf2-82f532ef42a1"
+              },
+              {
+                "name": "Update Section",
+                "id": "9169747d-2a80-4324-9033-a41eb0b73d0b",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"id\": 1,\n  \"heading\": \"Welcome to Green Agile Updated\",\n  \"sort_order\": 1\n}"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/home/sections/update",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "home",
+                      "sections",
+                      "update"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-10T11:19:38.000Z",
+                "updatedAt": "2026-01-10T11:20:41.000Z",
+                "uid": "44267784-9169747d-2a80-4324-9033-a41eb0b73d0b"
+              },
+              {
+                "name": "Delete Section",
+                "id": "1636fad7-9c81-4127-a1bf-70b28c125bc4",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{ \"id\": 3 }"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/home/sections/delete",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "home",
+                      "sections",
+                      "delete"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-10T11:19:38.000Z",
+                "updatedAt": "2026-01-10T12:43:59.000Z",
+                "uid": "44267784-1636fad7-9c81-4127-a1bf-70b28c125bc4"
+              }
+            ],
+            "id": "c3ffa58a-9b1e-4e7c-941d-3ce573f7e5dc",
+            "createdAt": "2026-01-10T11:19:38.000Z",
+            "updatedAt": "2026-01-10T11:20:47.000Z",
+            "uid": "44267784-c3ffa58a-9b1e-4e7c-941d-3ce573f7e5dc"
+          },
+          {
+            "name": "Admin - Section Images",
+            "item": [
+              {
+                "name": "Upload Section Image",
+                "id": "f1d3dc18-d1ec-4dd6-8d41-d0a5d3acf4e7",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    }
+                  ],
+                  "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                      {
+                        "key": "section_id",
+                        "value": "1",
+                        "type": "text"
+                      },
+                      {
+                        "key": "sort_order",
+                        "value": "1",
+                        "type": "text"
+                      },
+                      {
+                        "key": "image",
+                        "type": "file",
+                        "src": "/D:/Application/images/pexels-mastercowley-1300402.jpg"
+                      }
+                    ]
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/home/sections/images/upload",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "home",
+                      "sections",
+                      "images",
+                      "upload"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-10T11:19:38.000Z",
+                "updatedAt": "2026-01-10T12:43:59.000Z",
+                "uid": "44267784-f1d3dc18-d1ec-4dd6-8d41-d0a5d3acf4e7"
+              },
+              {
+                "name": "Delete Section Image",
+                "id": "e4812c0f-1e6b-43bf-960f-5186436c09df",
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                },
+                "request": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{ \"id\": 5 }"
+                  },
+                  "url": {
+                    "raw": "{{base_url}}/admin/home/sections/images/delete",
+                    "host": [
+                      "{{base_url}}"
+                    ],
+                    "path": [
+                      "admin",
+                      "home",
+                      "sections",
+                      "images",
+                      "delete"
+                    ]
+                  }
+                },
+                "response": [],
+                "createdAt": "2026-01-10T11:19:38.000Z",
+                "updatedAt": "2026-01-10T11:20:41.000Z",
+                "uid": "44267784-e4812c0f-1e6b-43bf-960f-5186436c09df"
+              }
+            ],
+            "id": "956f37b8-a5a6-461f-8349-ba48f18b8ba4",
+            "createdAt": "2026-01-10T11:19:38.000Z",
+            "updatedAt": "2026-01-10T11:20:47.000Z",
+            "uid": "44267784-956f37b8-a5a6-461f-8349-ba48f18b8ba4"
+          }
+        ],
+        "id": "735353b2-aae6-4510-90c8-60f3b9864e6f",
+        "createdAt": "2026-01-10T11:20:14.000Z",
+        "updatedAt": "2026-01-10T11:20:47.000Z",
+        "uid": "44267784-735353b2-aae6-4510-90c8-60f3b9864e6f"
       }
     ],
     "event": [
