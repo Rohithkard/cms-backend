@@ -10,65 +10,92 @@ class PackageRequestController
        PUBLIC – CREATE PACKAGE REQUEST
        POST /package-request
     ========================= */
-    public static function create(): void
+
+        private static array $allowedRequestTypes = ["PRODUCT", "CATEGORY"];
+
+     public static function create(): void
     {
         $b = get_json_body();
 
-        $required = ["first_name","email","phone","products"];
+        $required = ["first_name", "email", "phone", "products", "request_type"];
         foreach ($required as $f) {
             if (empty($b[$f])) {
-                json_response(["success"=>false,"message"=>"$f required"],400);
+                json_response([
+                    "success" => false,
+                    "message" => "$f required"
+                ], 400);
             }
         }
 
-        if (!is_array($b["products"]) || count($b["products"]) === 0 || count($b["products"]) > 3) {
+        // ✅ Validate request_type ENUM
+        if (!in_array($b["request_type"], self::$allowedRequestTypes, true)) {
             json_response([
-                "success"=>false,
-                "message"=>"products must be an array (1–3 items)"
-            ],400);
+                "success" => false,
+                "message" => "Invalid request_type (PRODUCT | CATEGORY)"
+            ], 400);
+        }
+
+        // ✅ Validate products array (1–3)
+        if (!is_array($b["products"]) || count($b["products"]) < 1 || count($b["products"]) > 3) {
+            json_response([
+                "success" => false,
+                "message" => "products must be an array (1–3 items)"
+            ], 400);
         }
 
         $pdo = db();
         $pdo->beginTransaction();
 
         try {
+            // 🔹 Insert request
             $pdo->prepare("
                 INSERT INTO package_requests
-                (first_name,last_name,email,phone,category)
-                VALUES (?,?,?,?,?)
+                (first_name, last_name, email, phone, request_type, category)
+                VALUES (?, ?, ?, ?, ?, ?)
             ")->execute([
                 $b["first_name"],
-                $b["last_name"],
+                $b["last_name"] ?? null,
                 $b["email"],
                 $b["phone"],
+                $b["request_type"],
                 $b["category"] ?? null
             ]);
 
             $requestId = (int)$pdo->lastInsertId();
 
+            // 🔹 Insert products (max 3)
             $stmt = $pdo->prepare("
                 INSERT INTO package_request_items
                 (package_request_id, product_name, quantity)
-                VALUES (?,?,?)
+                VALUES (?, ?, ?)
             ");
 
             foreach ($b["products"] as $p) {
                 if (empty($p["product_name"]) || empty($p["quantity"])) {
                     throw new Exception("product_name and quantity required");
                 }
-                $stmt->execute([$requestId, $p["product_name"], (int)$p["quantity"]]);
+
+                $stmt->execute([
+                    $requestId,
+                    $p["product_name"],
+                    (int)$p["quantity"]
+                ]);
             }
 
             $pdo->commit();
 
             json_response([
-                "success"=>true,
-                "message"=>"Package request submitted successfully"
+                "success" => true,
+                "message" => "Package request submitted successfully",
+                "id" => $requestId
             ]);
 
         } catch (Exception $e) {
             $pdo->rollBack();
-            json_response(["success"=>false,"message"=>$e->getMessage()],400);
+            json_response([
+                "success" => false,
+                "message" => $e->getMessage()
+            ], 400);
         }
     }
 
@@ -76,15 +103,33 @@ class PackageRequestController
        ADMIN – LIST PACKAGE REQUESTS
        GET /admin/package-requests
     ========================= */
-    public static function list(): void
+      public static function list(): void
     {
         require_admin();
 
-        $rows = db()->query("
-            SELECT *
-            FROM package_requests
-            ORDER BY created_at DESC
-        ")->fetchAll();
+        $where = [];
+        $params = [];
+
+        if (!empty($_GET["request_type"])) {
+            if (!in_array($_GET["request_type"], self::$allowedRequestTypes, true)) {
+                json_response([
+                    "success" => false,
+                    "message" => "Invalid request_type filter"
+                ], 400);
+            }
+            $where[] = "request_type = ?";
+            $params[] = $_GET["request_type"];
+        }
+
+        $sql = "SELECT * FROM package_requests";
+        if ($where) {
+            $sql .= " WHERE " . implode(" AND ", $where);
+        }
+        $sql .= " ORDER BY created_at DESC";
+
+        $stmt = db()->prepare($sql);
+        $stmt->execute($params);
+        $rows = $stmt->fetchAll();
 
         foreach ($rows as &$r) {
             $items = db()->prepare("
@@ -96,7 +141,10 @@ class PackageRequestController
             $r["products"] = $items->fetchAll();
         }
 
-        json_response(["success"=>true,"data"=>$rows]);
+        json_response([
+            "success" => true,
+            "data" => $rows
+        ]);
     }
 
     /* =========================

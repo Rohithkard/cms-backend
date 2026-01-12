@@ -637,22 +637,38 @@ class HomeController
        PUBLIC – INTRO
     ========================= */
     public static function intro(): void
-    {
-        $row = db()->query("
-            SELECT heading, sub_heading, description, points, closing_text
-            FROM home_intro
-            LIMIT 1
-        ")->fetch();
+{
+    $pdo = db();
 
-        if ($row && $row["points"]) {
-            $row["points"] = json_decode($row["points"], true);
-        }
+    $row = $pdo->query("
+        SELECT heading, sub_heading, description, points, closing_text
+        FROM home_intro
+        LIMIT 1
+    ")->fetch() ?: [];
 
-        json_response([
-            "success" => true,
-            "data" => $row ?: []
-        ]);
+    if (!empty($row["points"])) {
+        $row["points"] = json_decode($row["points"], true);
     }
+
+    $images = $pdo->query("
+        SELECT id, image_url
+        FROM home_intro_images
+        WHERE is_active = 1
+        ORDER BY sort_order ASC
+    ")->fetchAll();
+
+    foreach ($images as &$img) {
+        $img["image_url"] = asset_url($img["image_url"]);
+    }
+
+    json_response([
+        "success" => true,
+        "data" => [
+            "content" => $row,
+            "images" => $images
+        ]
+    ]);
+}
 
     /* =========================
        ADMIN – UPDATE INTRO
@@ -701,5 +717,44 @@ class HomeController
             "message" => "Home intro updated"
         ]);
     }
+
+    public static function uploadIntroImage(): void
+{
+    require_admin();
+
+    $res = handle_image_upload("image");
+    if (!$res["ok"]) {
+        json_response(["success"=>false,"message"=>$res["message"]],400);
+    }
+
+    db()->prepare("
+        INSERT INTO home_intro_images (image_url, sort_order, is_active)
+        VALUES (?, ?, ?)
+    ")->execute([
+        $res["url"],
+        (int)($_POST["sort_order"] ?? 0),
+        1
+    ]);
+
+    json_response([
+        "success" => true,
+        "message" => "Intro image uploaded",
+        "image_url" => asset_url($res["url"])
+    ]);
+}
+public static function deleteIntroImage(): void
+{
+    require_admin();
+    $id = (int)(get_json_body()["id"] ?? 0);
+
+    if (!$id) {
+        json_response(["success"=>false,"message"=>"id required"],400);
+    }
+
+    db()->prepare("DELETE FROM home_intro_images WHERE id=?")->execute([$id]);
+
+    json_response(["success"=>true,"message"=>"Intro image deleted"]);
+}
+
 
 }

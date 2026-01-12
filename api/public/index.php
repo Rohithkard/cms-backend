@@ -128,4 +128,8 @@ route("POST", "/admin/home/sections/images/upload", fn()=>AboutUshHomeController
 route("POST", "/admin/home/sections/images/delete", fn()=>AboutUshHomeController::deleteImage());
 
 
+route("POST", "/admin/home/intro/update", fn()=>HomeController::updateIntro());
+route("POST", "/admin/home/intro/images/upload", fn()=>HomeController::uploadIntroImage());
+route("POST", "/admin/home/intro/images/delete", fn()=>HomeController::deleteIntroImage());
+
 not_found();

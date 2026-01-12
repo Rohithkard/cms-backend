@@ -135,7 +135,7 @@ CREATE TABLE product_images (
 -- ========================
 CREATE TABLE banners (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  banner_type ENUM('HOME_TOP','HOME_MIDDLE','SIDEBAR','CONTACT_US','ABOUT_US','NORMAL_IMAGE') NOT NULL,
+  banner_type ENUM('HOME_TOP','HOME_MIDDLE','SIDEBAR','CONTACT_US','ABOUT_US','NORMAL_IMAGE','HOME_BOTTOM_IMAGE') NOT NULL,
   title VARCHAR(190),
   subtitle VARCHAR(190),
   image_url VARCHAR(255) NOT NULL,
@@ -270,6 +270,12 @@ CREATE TABLE package_request_items (
 );
 
 
+ALTER TABLE package_requests
+ADD request_type ENUM(
+  'PRODUCT',
+  'CATEGORY'
+) NOT NULL DEFAULT 'PRODUCT' AFTER phone;
+
 CREATE TABLE home_intro (
   id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   heading VARCHAR(190) NOT NULL,
@@ -311,4 +317,13 @@ CREATE TABLE home_section_images (
     FOREIGN KEY (section_id)
     REFERENCES home_sections(id)
     ON DELETE CASCADE
+);
+
+
+CREATE TABLE home_intro_images (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  image_url VARCHAR(255) NOT NULL,
+  sort_order INT DEFAULT 0,
+  is_active TINYINT(1) DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

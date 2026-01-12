@@ -43,8 +43,29 @@ class AboutUshHomeController
     public static function listAdmin(): void
     {
         require_admin();
-        $rows = db()->query("SELECT * FROM home_sections ORDER BY sort_order ASC")->fetchAll();
-        json_response(["success"=>true,"data"=>$rows]);
+       $sections = db()->query("
+            SELECT id, section_key, heading, sub_heading, content
+            FROM home_sections
+            WHERE is_active = 1
+            ORDER BY sort_order ASC
+        ")->fetchAll();
+
+        foreach ($sections as &$s) {
+            $images = db()->prepare("
+                SELECT id, image_url
+                FROM home_section_images
+                WHERE section_id = ? AND is_active = 1
+                ORDER BY sort_order ASC
+            ");
+            $images->execute([$s["id"]]);
+
+            $s["images"] = array_map(fn($i)=>[
+                "id"=>$i["id"],
+                "url"=>asset_url($i["image_url"])
+            ], $images->fetchAll());
+        }
+
+        json_response(["success"=>true,"data"=>$sections]);
     }
 
     /* =========================
