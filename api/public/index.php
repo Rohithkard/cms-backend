@@ -14,6 +14,7 @@ require_once __DIR__ . "/../controllers/HomeController.php";
 require_once __DIR__ . "/../controllers/ContactController.php";
 require_once __DIR__ . "/../controllers/PackageRequestController.php";
 require_once __DIR__ . "/../controllers/AboutUsHomeController.php";
+require_once __DIR__ . "/../controllers/EmailController.php";
 
 
 
@@ -40,6 +41,9 @@ route("GET", "/home", fn()=>HomeController::get());
 route("POST", "/package-request", fn()=>PackageRequestController::create());
 
 route("GET", "/home/intro", fn() => HomeController::intro());
+
+route("POST", "/send-email", fn() => EmailController::send());
+
 
 
 

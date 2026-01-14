@@ -20,5 +20,9 @@ return [
 
   "auth" => [
     "token_days" => 15
+  ],
+  "mail" => [
+    "from_email" => "no-reply@ecommerce.stokai.live",
+    "from_name"  => "Otp Service"
   ]
 ];
