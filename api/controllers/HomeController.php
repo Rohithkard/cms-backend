@@ -103,37 +103,66 @@ class HomeController
     /* =====================================================
        ADMIN – HOME CONTENT (LIST + UPDATE)
     ===================================================== */
-    public static function listContent(): void
-    {
-        require_admin();
-        $row = db()->query("SELECT * FROM home_content LIMIT 1")->fetch();
-        json_response(["success" => true, "data" => $row]);
+public static function listContent(): void
+{
+    $row = db()->query("SELECT * FROM home_content LIMIT 1")->fetch();
+
+    if ($row && !empty($row["about_text"])) {
+        $decoded = json_decode($row["about_text"], true);
+
+        // Safety check (in case of bad data)
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $row["about_text"] = $decoded;
+        }
     }
 
-    public static function updateContent(): void
-    {
-        require_admin();
-        $b = get_json_body();
+    json_response([
+        "success" => true,
+        "data" => $row ?: []
+    ]);
+}
 
-        $allowed = ["about_title", "about_text", "why_title", "map_embed_url"];
-        $set = [];
-        $params = [];
 
-        foreach ($allowed as $f) {
-            if (array_key_exists($f, $b)) {
-                $set[] = "$f=?";
+ public static function updateContent(): void
+{
+    require_admin();
+    $b = get_json_body();
+
+    $allowed = ["about_title", "about_text", "why_title", "map_embed_url"];
+    $set = [];
+    $params = [];
+
+    foreach ($allowed as $f) {
+        if (array_key_exists($f, $b)) {
+
+            // 🔥 IMPORTANT FIX FOR JSON COLUMN
+            if ($f === "about_text" && is_array($b[$f])) {
+                $set[] = "about_text = ?";
+                $params[] = json_encode(
+                    $b[$f],
+                    JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+                );
+            } else {
+                $set[] = "$f = ?";
                 $params[] = $b[$f];
             }
         }
-
-        if (!$set)
-            json_response(["success" => false, "message" => "No fields"], 400);
-
-        db()->prepare("UPDATE home_content SET " . implode(",", $set) . " LIMIT 1")
-            ->execute($params);
-
-        json_response(["success" => true, "message" => "Home content updated"]);
     }
+
+    if (!$set) {
+        json_response(["success" => false, "message" => "No fields"], 400);
+    }
+
+    db()->prepare(
+        "UPDATE home_content SET " . implode(",", $set) . " LIMIT 1"
+    )->execute($params);
+
+    json_response([
+        "success" => true,
+        "message" => "Home content updated"
+    ]);
+}
+
 
     /* =====================================================
        ADMIN – WHY CHOOSE US (LIST / CREATE / UPDATE / DELETE)
